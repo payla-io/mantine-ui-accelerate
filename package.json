@@ -1,0 +1,24 @@
+{
+  "name": "mantine-ui-accelerate",
+  "version": "1.0.0",
+  "description": "A collections of customizable UI components based on Mantine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundayguru/mantine-ui-accelerate.git"
+  },
+  "keywords": [
+    "mantine",
+    "UI",
+    "UI components"
+  ],
+  "author": "sundayguru",
+  "license": "MIT license",
+  "bugs": {
+    "url": "https://github.com/sundayguru/mantine-ui-accelerate/issues"
+  },
+  "homepage": "https://github.com/sundayguru/mantine-ui-accelerate#readme"
+}
