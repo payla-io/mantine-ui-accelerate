@@ -1,24 +1,39 @@
 {
   "name": "mantine-ui-accelerate",
   "version": "1.0.0",
-  "description": "A collections of customizable UI components based on Mantine",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sundayguru/mantine-ui-accelerate.git"
+  "author": "",
+  "license": "MIT",
+  "resolutions": {
+    "jackspeak": "2.1.1"
   },
-  "keywords": [
-    "mantine",
-    "UI",
-    "UI components"
-  ],
-  "author": "sundayguru",
-  "license": "MIT license",
-  "bugs": {
-    "url": "https://github.com/sundayguru/mantine-ui-accelerate/issues"
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.5.0",
+    "@storybook/addon-essentials": "^8.1.10",
+    "@storybook/addon-interactions": "^8.1.10",
+    "@storybook/addon-links": "^8.1.10",
+    "@storybook/addon-onboarding": "^8.1.10",
+    "@storybook/addon-styling": "^1.3.7",
+    "@storybook/blocks": "^8.1.10",
+    "@storybook/react": "^8.1.10",
+    "@storybook/react-vite": "^8.1.10",
+    "@storybook/test": "^8.1.10",
+    "@tsconfig/recommended": "^1.0.6",
+    "prop-types": "^15.8.1",
+    "storybook": "^8.1.10",
+    "storybook-addon-mantine": "^4.0.2",
+    "storybook-dark-mode": "^4.0.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
   },
-  "homepage": "https://github.com/sundayguru/mantine-ui-accelerate#readme"
+  "dependencies": {
+    "@mantine/core": "^7.10.2",
+    "@mantine/hooks": "^7.10.2"
+  }
 }
