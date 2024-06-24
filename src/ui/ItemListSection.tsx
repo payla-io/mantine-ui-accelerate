@@ -7,18 +7,19 @@ import {
   TitleProps,
 } from "@mantine/core";
 import ItemList, { ItemListProps } from "./ItemList";
+import React from "react";
 
 interface ItemListSectionProps {
   title?: string;
   titleProps?: TitleProps;
   cardProps?: CardProps;
   itemListProps: ItemListProps;
-  boxProps?: BoxProps;
+  containerProps?: BoxProps;
 }
 
 export default function ItemListSection(props: Readonly<ItemListSectionProps>) {
   return (
-    <Box {...props.boxProps}>
+    <Box {...props.containerProps}>
       {props.title && (
         <Title size="xs" my="sm" {...props.titleProps}>
           {props.title}

@@ -11,17 +11,12 @@ import {
 import React from "react";
 
 export interface ItemProps {
-  imageSrc?: string;
-  imageAlt?: string;
   imageProps?: ImageProps;
   label?: string;
   labelProps?: TextProps;
   icon?: React.ReactNode;
   vertical?: boolean;
   reverse?: boolean;
-  gap?: string;
-  align?: string;
-  justify?: string;
   divider?: boolean;
   dividerProps?: DividerProps;
   itemComponent?: React.ElementType;
@@ -46,10 +41,8 @@ export default function Item(props: Readonly<ItemProps>) {
       <Flex
         px="2px"
         py="2px"
-        gap={props.gap ?? "sm"}
-        align={props.align}
-        justify={props.justify}
         flex={1}
+        gap={"sm"}
         direction={props.reverse ? reverseDirection : direction}
         onClick={() => {
           if (props.onClick) props.onClick(props);
@@ -65,14 +58,8 @@ export default function Item(props: Readonly<ItemProps>) {
               props.renderItem(props)
             ) : (
               <>
-                {props.imageSrc && (
-                  <Image
-                    src={props.imageSrc}
-                    alt={props.imageAlt ?? "item image"}
-                    {...props.imageProps}
-                  />
-                )}
-                {!props.imageSrc && props.icon && props.icon}
+                {props.imageProps?.src && <Image {...props.imageProps} />}
+                {!props.imageProps?.src && props.icon}
                 <Text {...props.labelProps}>{props.label}</Text>
                 {props.value && (
                   <Text {...props.valueProps}>{props.value}</Text>

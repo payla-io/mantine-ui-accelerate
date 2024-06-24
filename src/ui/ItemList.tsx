@@ -1,5 +1,6 @@
 import { Flex, FlexProps } from "@mantine/core";
 import Item, { ItemProps } from "./Item";
+import React from "react";
 
 export interface ItemListProps {
   items: ItemProps[];

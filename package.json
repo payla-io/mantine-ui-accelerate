@@ -1,15 +1,28 @@
 {
   "name": "mantine-ui-accelerate",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Collection of mantine ui components to help you accelerate your development",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "author": "",
+  "author": "Sundayguru",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/payla-io/mantine-ui-accelerate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/payla-io/mantine-ui-accelerate/issues"
+  },
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src/**/*"
+  ],
   "resolutions": {
     "jackspeak": "2.1.1"
   },

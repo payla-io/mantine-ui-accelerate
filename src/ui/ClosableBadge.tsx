@@ -1,12 +1,13 @@
 import { ActionIcon, Badge, Flex, Text } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
+import React from "react";
 
 export interface ClosableBadgeProps {
   color?: string;
   label: string;
   onClose?: () => void;
 }
-export function ClosableBadge(props: Readonly<ClosableBadgeProps>) {
+export default function ClosableBadge(props: Readonly<ClosableBadgeProps>) {
   return (
     <Badge color={props.color}>
       <Flex gap="xs" align="center">

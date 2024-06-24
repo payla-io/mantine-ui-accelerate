@@ -1,28 +1,30 @@
-import { Flex } from "@mantine/core";
+import { Anchor, Flex } from "@mantine/core";
 import React from "react";
-import { Link } from "react-router-dom";
 
 interface Item {
   label: string;
-  to: string;
+  href?: string;
+  onClick?: () => void;
   style?: React.CSSProperties;
 }
 interface CLinkListProps {
   items: Item[];
   style?: React.CSSProperties;
+  containerProps?: React.ComponentProps<typeof Flex>;
 }
 
 export default function CLinkList(props: Readonly<CLinkListProps>) {
   return (
-    <Flex justify="center" gap={"md"} direction={{ base: "column", sm: "row" }}>
+    <Flex justify="center" gap={"md"} direction={{ base: "column", sm: "row" }} {...props.containerProps}>
       {props.items.map((item) => (
-        <Link
-          key={item.to}
-          to={item.to}
+        <Anchor
+          key={item.href}
+          href={item.href}
           style={{ ...props.style, ...item.style }}
+          onClick={item.onClick}
         >
           {item.label}
-        </Link>
+        </Anchor>
       ))}
     </Flex>
   );
