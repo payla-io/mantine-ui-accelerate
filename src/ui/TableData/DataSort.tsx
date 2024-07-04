@@ -1,9 +1,13 @@
 import { Flex, useMantineTheme } from "@mantine/core";
 import { IconArrowNarrowDown, IconArrowNarrowUp } from "@tabler/icons-react";
 import { DataSortingProps } from "./types";
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function DataSort({ column, orderBy, onChange }: Readonly<DataSortingProps>) {
+export default function DataSort({
+  column,
+  orderBy,
+  onChange,
+}: Readonly<DataSortingProps>) {
   const theme = useMantineTheme();
   const [direction, setDirection] = useState<"asc" | "desc">("asc");
   if (!column.fieldName && !column.getValue) return null;

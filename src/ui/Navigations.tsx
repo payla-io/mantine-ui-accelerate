@@ -2,6 +2,7 @@ import { Box, Stack, ActionIcon } from "@mantine/core";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { CNavLink } from "./CNavLink";
+import React from "react";
 
 interface INav {
   label: string;
@@ -16,9 +17,10 @@ interface NavigationsProps {
   setMinimisedNav?: (minimised: boolean) => void;
   minimisedNav?: boolean;
   links: INav[];
+  component?: any;
 }
 
-export function Navigations(props: Readonly<NavigationsProps>) {
+export default function Navigations(props: Readonly<NavigationsProps>) {
   const renderNav = (nav: INav, index: number) => {
     if (nav.hidden) return null;
     const isActive = nav.children?.length
@@ -32,7 +34,7 @@ export function Navigations(props: Readonly<NavigationsProps>) {
         label={nav.label}
         leftSection={nav.icon}
         childrenOffset={28}
-        component={Link}
+        component={props.component ?? "a"}
         minimised={props.minimisedNav}
         active={isActive}
       >

@@ -4,6 +4,7 @@ import InfiniteScroll, {
   Props as InfiniteScrollProps,
 } from "react-infinite-scroll-component";
 import TableData from ".";
+import React from "react";
 
 export interface InfiniteScrollTableProps extends TableDataProps {
   loadMore?: () => void;

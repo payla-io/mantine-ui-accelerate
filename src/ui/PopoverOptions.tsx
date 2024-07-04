@@ -1,9 +1,17 @@
-import { Checkbox, Popover, Stack, Input, ScrollArea, PopoverProps, Text } from "@mantine/core";
+import {
+  Checkbox,
+  Popover,
+  Stack,
+  Input,
+  ScrollArea,
+  PopoverProps,
+  Text,
+} from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface PopoverOptionsProps {
-  selectedOptions: any[];
+  selectedOptions?: any[];
   trigger?: React.ReactNode;
   triggerSelected?: React.ReactNode;
   maxHeight?: number;
@@ -11,7 +19,7 @@ export interface PopoverOptionsProps {
   renderItem?: (
     option: any,
     onSelect: (option: any) => void,
-    isSelected: boolean,
+    isSelected: boolean
   ) => React.ReactNode;
   getValue?: (option: any) => string;
   getLabel?: (option: any) => string;
@@ -20,7 +28,7 @@ export interface PopoverOptionsProps {
   title?: string;
 }
 
-export function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
+export default function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState(props.selectedOptions ?? []);
   const showSearch = (props.options.length ?? 0) > 5;
@@ -70,7 +78,14 @@ export function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
   }, [selected]);
 
   return (
-    <Popover position="bottom" withArrow keepMounted shadow="md" radius={"lg"} {...props.popoverProps}>
+    <Popover
+      position="bottom"
+      withArrow
+      keepMounted
+      shadow="md"
+      radius={"lg"}
+      {...props.popoverProps}
+    >
       <Popover.Target>{getTrigger()}</Popover.Target>
       <Popover.Dropdown>
         {props.title && <Text mb="lg">{props.title}</Text>}
@@ -89,7 +104,7 @@ export function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
                   props.renderItem(
                     option,
                     onSelect,
-                    selected.some((o) => getValue(option) === getValue(o)),
+                    selected.some((o) => getValue(option) === getValue(o))
                   )
                 ) : (
                   <Checkbox
@@ -97,13 +112,13 @@ export function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
                     key={getValue(option) ?? i}
                     label={getLabel(option)}
                     checked={selected.some(
-                      (o) => getValue(option) === getValue(o),
+                      (o) => getValue(option) === getValue(o)
                     )}
                     onClick={() => {
                       onSelect(option);
                     }}
                   />
-                ),
+                )
               )}
             </Stack>
           </ScrollArea.Autosize>

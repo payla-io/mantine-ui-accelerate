@@ -1,5 +1,5 @@
 {
-  "name": "mantine-ui-accelerate",
+  "name": "@payla-io/mantine-ui-accelerate",
   "version": "1.0.0",
   "description": "Collection of mantine ui components to help you accelerate your development",
   "main": "src/index.ts",
@@ -8,7 +8,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "author": "Sundayguru",
+  "author": "payla-io",
   "license": "MIT",
   "repository": {
     "type": "git",

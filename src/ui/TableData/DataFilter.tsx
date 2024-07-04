@@ -1,7 +1,7 @@
 import { Checkbox, Popover, Stack, Input, Box } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
 import { DataFilterProps, IOption } from "./types";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function DataFilter({
   selectedOptions,
@@ -16,7 +16,7 @@ export default function DataFilter({
     if (!searchTerm) return options ?? [];
     return (
       options?.filter((option) =>
-        option.label.toLowerCase().includes(searchTerm.toLowerCase()),
+        option.label.toLowerCase().includes(searchTerm.toLowerCase())
       ) ?? []
     );
   };

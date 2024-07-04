@@ -20,9 +20,10 @@ import {
 } from "./types";
 import SkeletonRow from "./SkeletonRow";
 import { IconDots, IconEye } from "@tabler/icons-react";
-import { PopoverOptions } from "../PopoverOptions";
+import PopoverOptions from "../PopoverOptions";
 import Item from "../Item";
 import useUniqueOptions from "../../hooks/useUniqueOptions";
+import React from "react";
 
 const renderValue = (item: IKeyValue, fieldName?: string) => {
   return (
@@ -57,7 +58,7 @@ const TableData = ({
   const unique = useUniqueOptions({ data });
   const [selectedIndex, setSelectedIndex] = useState<number>();
   const [selectedColumns, setSelectedColumns] = useState<ITableDataColumn[]>(
-    columns.filter((col) => !col.hidden),
+    columns.filter((col) => !col.hidden)
   );
 
   useEffect(() => {
@@ -71,13 +72,13 @@ const TableData = ({
         if (rest.getValue && rest.getLabel) {
           rest.options = unique.getUniqueOptionsByMethod(
             rest.getValue,
-            rest.getLabel,
+            rest.getLabel
           );
         } else {
           rest.options = unique.getUniqueOptions(
             valueField,
             labelField,
-            getFilterValue,
+            getFilterValue
           );
         }
       }
@@ -148,8 +149,8 @@ const TableData = ({
           }
           validities.push(
             !!filterOptions.some(
-              (option: IOption) => option.value === itemValue,
-            ),
+              (option: IOption) => option.value === itemValue
+            )
           );
         }
       });
@@ -178,7 +179,7 @@ const TableData = ({
     if (orderBy) {
       const { column } = orderBy;
       result = result.sort(
-        column.sorting === "string" ? sortStringMethod : sortNumberMethod,
+        column.sorting === "string" ? sortStringMethod : sortNumberMethod
       );
     }
 
@@ -199,6 +200,10 @@ const TableData = ({
   };
 
   const paginatedData = paginateFilteredData();
+
+  useEffect(() => {
+    setPage(1);
+  }, [data]);
 
   return (
     <>
@@ -222,7 +227,7 @@ const TableData = ({
                       <DataFilter
                         {...getFilterProps(
                           column.filter,
-                          column.fieldName as string,
+                          column.fieldName as string
                         )}
                       />
                     )}
@@ -256,7 +261,9 @@ const TableData = ({
                       <Item
                         key={option.label}
                         label={option.label}
-                        justify="space-between"
+                        containerProps={{
+                          justify: "space-between",
+                        }}
                         reverse
                         icon={
                           <ActionIcon
@@ -333,7 +340,7 @@ const TableData = ({
             <Flex gap="xl" align={"center"} wrap={"wrap"}>
               <Pagination
                 total={Math.ceil(
-                  (dataCount ?? filtered.length) / paginationSize,
+                  (dataCount ?? filtered.length) / paginationSize
                 )}
                 value={page}
                 onChange={(page: number) => {
@@ -355,7 +362,7 @@ const TableData = ({
                         if (
                           value >
                           Math.ceil(
-                            (dataCount ?? filtered.length) / paginationSize,
+                            (dataCount ?? filtered.length) / paginationSize
                           )
                         ) {
                           return;
