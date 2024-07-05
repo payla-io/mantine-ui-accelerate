@@ -7,7 +7,7 @@ export interface ClosableBadgeProps {
   label: string;
   onClose?: () => void;
 }
-export default function ClosableBadge(props: Readonly<ClosableBadgeProps>) {
+export function ClosableBadge(props: Readonly<ClosableBadgeProps>) {
   return (
     <Badge color={props.color}>
       <Flex gap="xs" align="center">

@@ -1,29 +1,29 @@
 import { Button, Menu } from "@mantine/core";
 import React from "react";
 
-interface IMenuItem {
+export interface CMenuItem {
   label: string;
   icon?: React.ReactNode;
-  onClick?: (item: IMenuItem) => void;
+  onClick?: (item: CMenuItem) => void;
   hidden?: boolean;
 }
-interface IData {
+export interface CMenuData {
   label?: string;
   hidden?: boolean;
   dividerAfter?: boolean;
-  items?: IMenuItem[];
+  items?: CMenuItem[];
 }
-interface CMenuProps {
-  data: IData[];
+export interface CMenuProps {
+  data: CMenuData[];
   target?: React.ReactNode;
-  getTarget?: (item: IMenuItem | undefined) => React.ReactNode;
+  getTarget?: (item: CMenuItem | undefined) => React.ReactNode;
   targetLabel?: string;
   menuProps?: React.ComponentProps<typeof Menu>;
 }
 
-export default function CMenu(props: Readonly<CMenuProps>) {
-  const [selected, setSelected] = React.useState<IMenuItem | undefined>(
-    undefined,
+export function CMenu(props: Readonly<CMenuProps>) {
+  const [selected, setSelected] = React.useState<CMenuItem | undefined>(
+    undefined
   );
   const getTarget = () => {
     if (props.getTarget) {

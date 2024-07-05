@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import FilterOptions from "../src/ui/FilterOptions";
+import { CFilterOptions } from "../src/ui/CFilterOptions";
 import React from "react";
 import { Button, Text } from "@mantine/core";
 
-const meta: Meta<typeof FilterOptions> = {
-  component: FilterOptions,
+const meta: Meta<typeof CFilterOptions> = {
+  component: CFilterOptions,
 };
 
 export default meta;
-type Story = StoryObj<typeof FilterOptions>;
+type Story = StoryObj<typeof CFilterOptions>;
 
 export const Basic: Story = {
   args: {

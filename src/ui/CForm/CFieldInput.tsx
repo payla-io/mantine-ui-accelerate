@@ -8,16 +8,16 @@ import {
   TextInput,
 } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
-import CRangeSlider from "./CRangeSlider";
-import CTextArea from "./CTextArea";
-import FileUpload from "./FileUpload";
-import CPhoneInput from "./CPhoneInput";
-import CheckboxInput from "./CheckboxInput";
-import LocationInput from "./LocationInput";
-import CSelect from "./CSelect";
+import { CRangeSlider } from "./CRangeSlider";
+import { CTextArea } from "./CTextArea";
+import { CFileUpload } from "./CFileUpload";
+import { CPhoneInput } from "./CPhoneInput";
+import { CheckboxInput } from "./CheckboxInput";
+import { CLocationInput } from "./CLocationInput";
+import { CSelect } from "./CSelect";
 import { ICondition } from "../../utils/conditions";
-import CTextInput from "./CTextInput";
-import CDateInputPicker from "./CDateInputPicker";
+import { CTextInput } from "./CTextInput";
+import { CDateInputPicker } from "./CDateInputPicker";
 import React from "react";
 
 export interface CFieldInputProps {
@@ -42,8 +42,8 @@ const componentMap: Record<string, any> = {
   textarea: CTextArea,
   email: TextInput,
   number: NumberInput,
-  image: FileUpload,
-  file: FileUpload,
+  image: CFileUpload,
+  file: CFileUpload,
   phone: CPhoneInput,
   password: PasswordInput,
   date: CDateInputPicker,
@@ -51,10 +51,10 @@ const componentMap: Record<string, any> = {
   multi_select: MultiSelect,
   range: CRangeSlider,
   checkbox: CheckboxInput,
-  location: LocationInput,
+  location: CLocationInput,
 };
 
-export default function CFieldInput(props: Readonly<CFieldInputProps>) {
+export function CFieldInput(props: Readonly<CFieldInputProps>) {
   const FieldComponent = componentMap[props.inputType];
   return (
     <Stack align={props.align}>

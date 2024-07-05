@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 
-export interface ItemProps {
+export interface CItemProps {
   imageProps?: ImageProps;
   label?: string;
   labelProps?: TextProps;
@@ -24,11 +24,11 @@ export interface ItemProps {
   value?: string | React.ReactNode;
   valueProps?: TextProps;
   containerProps?: FlexProps;
-  onClick?: (item: ItemProps) => void;
-  renderItem?: (item?: ItemProps) => React.ReactNode;
+  onClick?: (item: CItemProps) => void;
+  renderItem?: (item?: CItemProps) => React.ReactNode;
 }
 
-export default function Item(props: Readonly<ItemProps>) {
+export function CItem(props: Readonly<CItemProps>) {
   const direction = props.vertical ? "column" : "row";
   const reverseDirection: FlexProps["direction"] = props.reverse
     ? `${direction}-reverse`

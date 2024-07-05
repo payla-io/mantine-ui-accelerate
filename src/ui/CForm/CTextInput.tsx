@@ -1,11 +1,12 @@
 import { TextInput, TextInputProps } from "@mantine/core";
 import InputMask from "react-input-mask";
+import React from "react";
 
-interface CTextInputProps extends TextInputProps {
+export interface CTextInputProps extends TextInputProps {
   mask?: string;
 }
 
-export default function CTextInput(props: Readonly<CTextInputProps>) {
+export function CTextInput(props: Readonly<CTextInputProps>) {
   if (props.mask) {
     return <TextInput {...props} component={InputMask} />;
   }

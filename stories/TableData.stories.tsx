@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import TableData from "../src/ui/TableData";
+import { TableData } from "../src/ui/TableData";
 
 const meta: Meta<typeof TableData> = {
   component: TableData,

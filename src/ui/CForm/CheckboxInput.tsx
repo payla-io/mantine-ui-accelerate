@@ -1,29 +1,28 @@
-import { Checkbox, Stack } from '@mantine/core'
-import { IOption } from './types'
+import { Checkbox, Stack } from "@mantine/core";
+import { IOption } from "./types";
+import React from "react";
 
 interface CheckboxInputProps {
-    name: string
-    data: IOption[]
+  name: string;
+  data: IOption[];
 }
 
-export default function CheckboxInput(props: Readonly<CheckboxInputProps>) {
+export function CheckboxInput(props: Readonly<CheckboxInputProps>) {
   return (
-    <Checkbox.Group
-    {...props}
-    >
-        <Stack gap={'sm'}>
+    <Checkbox.Group {...props}>
+      <Stack gap={"sm"}>
         {props.data.map((option) => {
-        return (
+          return (
             <Checkbox
-                name={props.name}
-                key={option.value}
-                value={option.value}
-                label={option.label}
-                size="xs"
+              name={props.name}
+              key={option.value}
+              value={option.value}
+              label={option.label}
+              size="xs"
             />
-        )
+          );
         })}
-        </Stack>
+      </Stack>
     </Checkbox.Group>
-  )
+  );
 }

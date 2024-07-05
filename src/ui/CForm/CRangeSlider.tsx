@@ -1,4 +1,5 @@
 import { Stack, RangeSlider, Text, RangeSliderProps } from "@mantine/core";
+import React from "react";
 
 export interface CRangeSliderProps extends RangeSliderProps {
   label?: string;
@@ -6,7 +7,7 @@ export interface CRangeSliderProps extends RangeSliderProps {
   labelProps?: React.ComponentProps<typeof Text>;
   descriptionProps?: React.ComponentProps<typeof Text>;
 }
-export default function CRangeSlider(props: Readonly<CRangeSliderProps>) {
+export function CRangeSlider(props: Readonly<CRangeSliderProps>) {
   const { label, description, labelProps, descriptionProps, ...rest } = props;
   return (
     <Stack>

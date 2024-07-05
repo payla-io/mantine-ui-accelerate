@@ -3,7 +3,7 @@ import { TableDataProps } from "./types";
 import InfiniteScroll, {
   Props as InfiniteScrollProps,
 } from "react-infinite-scroll-component";
-import TableData from ".";
+import { TableData } from ".";
 import React from "react";
 
 export interface InfiniteScrollTableProps extends TableDataProps {
@@ -12,7 +12,7 @@ export interface InfiniteScrollTableProps extends TableDataProps {
   infiniteScrollProps?: InfiniteScrollProps;
 }
 
-const InfiniteScrollTable = (props: InfiniteScrollTableProps) => {
+export const InfiniteScrollTable = (props: InfiniteScrollTableProps) => {
   return (
     <InfiniteScroll
       dataLength={props.data.length}
@@ -27,5 +27,3 @@ const InfiniteScrollTable = (props: InfiniteScrollTableProps) => {
     </InfiniteScroll>
   );
 };
-
-export default InfiniteScrollTable;

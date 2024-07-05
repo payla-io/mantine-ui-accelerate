@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Flex, Grid, Stack } from "@mantine/core";
 import { ICFormField } from "./types";
 import CFieldInput from "./CFieldInput";
-import FormFooter from "./FormFooter";
+import { CFormFooter } from "./CFormFooter";
 import { validateConditions } from "../../utils/conditions";
 
 export interface CFormProps {
@@ -18,7 +18,9 @@ export interface CFormProps {
   };
   hideSubmit?: boolean;
   submitComponent?: React.ReactNode;
-  getSubmitComponent?: (formInstance: UseFormReturnType<Record<string, unknown>>) => React.ReactNode;
+  getSubmitComponent?: (
+    formInstance: UseFormReturnType<Record<string, unknown>>
+  ) => React.ReactNode;
   submitLabel?: string;
   continueLabel?: string;
   skipLabel?: string;
@@ -46,16 +48,16 @@ export interface CFormProps {
   }) => void;
 }
 
-export default function CForm(props: Readonly<CFormProps>) {
-  const [currentIndex, setCurrentIndex] = useState(props.currentIndex ?? 0)
-  const formRef = useRef<any>(null)
+export function CForm(props: Readonly<CFormProps>) {
+  const [currentIndex, setCurrentIndex] = useState(props.currentIndex ?? 0);
+  const formRef = useRef<any>(null);
 
   const getDefaultValues = (field: ICFormField) => {
     if (["select", "multi_select"].includes(field.inputType)) {
       return [];
     } else if (["range"].includes(field.inputType)) {
       return [0, 0];
-    }else if (["location"].includes(field.inputType)) {
+    } else if (["location"].includes(field.inputType)) {
       return {};
     } else if (field.inputType === "date") {
       if (field.inputProps?.type === "range") return [null, null];
@@ -76,16 +78,23 @@ export default function CForm(props: Readonly<CFormProps>) {
     const data: any = {};
     props.data.forEach((field) => {
       data[field.name] = (value: unknown, values: Record<string, unknown>) => {
-        const message = isNotEmpty(props.errorMessages?.required ?? "This field is required")(value);
-        if (field.inputProps.required  && message) {
+        const message = isNotEmpty(
+          props.errorMessages?.required ?? "This field is required"
+        )(value);
+        if (field.inputProps.required && message) {
           return message;
         }
         if (field.inputType === "email" && value) {
-          return isEmail(props.errorMessages?.invalidEmail ?? "Invalid email")(value);
+          return isEmail(props.errorMessages?.invalidEmail ?? "Invalid email")(
+            value
+          );
         }
-        const { isValid, failed} = validateConditions(field.valueConditions ?? [], values)
+        const { isValid, failed } = validateConditions(
+          field.valueConditions ?? [],
+          values
+        );
         if (!isValid) {
-          return failed.join(", ")
+          return failed.join(", ");
         }
         if (field.validate) {
           return field.validate(value, values);
@@ -102,44 +111,42 @@ export default function CForm(props: Readonly<CFormProps>) {
     validateInputOnChange: true,
   });
 
-  const additionalProps: any = {}
+  const additionalProps: any = {};
 
   if (!props.noFormTag) {
     additionalProps.onSubmit = fmk.onSubmit(() => {
       if (props.onSubmit) props.onSubmit(fmk.values);
-    })
+    });
   }
 
   const handleBack = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
+      setCurrentIndex(currentIndex - 1);
     }
-  }
+  };
 
   const handleContinue = () => {
     if (currentIndex < props.data.length - 1) {
-      setCurrentIndex(currentIndex + 1)
+      setCurrentIndex(currentIndex + 1);
     }
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
+    window.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
         setCurrentIndex((currentIndex) => {
-          const currentData = props.data[currentIndex]
+          const currentData = props.data[currentIndex];
           fmk.validateField(currentData.name);
-          if(fmk.isValid(currentData.name)) {
+          if (fmk.isValid(currentData.name)) {
             if (currentIndex < props.data.length - 1) {
-                return currentIndex + 1
-            } else if (props.onSubmit)  {
+              return currentIndex + 1;
+            } else if (props.onSubmit) {
               fmk.validate();
-              if (fmk.isValid())
-                formRef.current.requestSubmit()
+              if (fmk.isValid()) formRef.current.requestSubmit();
             }
           }
-          return currentIndex
-        })
-       
+          return currentIndex;
+        });
       }
     });
     if (props.setFormInstance) props.setFormInstance(fmk);
@@ -155,20 +162,22 @@ export default function CForm(props: Readonly<CFormProps>) {
       ref={formRef}
       {...additionalProps}
       style={{ height: props.fullHeight ? "95%" : "auto" }}
-      
     >
       <Stack
         gap="md"
         justify="space-between"
         h="100%"
-        p='md'
+        p="md"
         {...props.formContainerProps}
       >
         <Grid grow={props.grow} gutter={props.gutter ?? 10}>
           {props.data.map((field, index) => {
             const { span, hidden, initialValue, ...fieldInputProps } = field;
             if (hidden || field.inputType === "label") return null;
-            const {isValid} = validateConditions(field.visibilityConditions ?? [], fmk.values ?? {})
+            const { isValid } = validateConditions(
+              field.visibilityConditions ?? [],
+              fmk.values ?? {}
+            );
             if (!isValid) return null;
             if (props.singleQuestion && currentIndex !== index) return null;
             if (initialValue && !fmk.values[field.name])
@@ -189,34 +198,52 @@ export default function CForm(props: Readonly<CFormProps>) {
             );
           })}
         </Grid>
-        <Flex p="xl" style={{position: props.fixedFooter ? 'fixed' : 'relative', bottom: 0, left: 0, zIndex: props.fixedFooter ? 9 : 0}} justify={'center'} w="100%" bg="var(--mantine-primary-color-0)"  {...props.footerContainerWrapperProps}>
-          <Flex w={{base: '100%', sm: 720}} justify={'right'} {...props.footerContainerProps}>
-          {!props.hideSubmit && (
-            <>
-              {props.getSubmitComponent ? (
-                props.getSubmitComponent(fmk)
-              ) : (
-                <FormFooter 
-                  currentIndex={currentIndex}
-                  handleContinue={handleContinue}
-                  handleBack={handleBack}
-                  singleQuestion={props.singleQuestion}
-                  data={props.data[currentIndex]}
-                  totalQuestions={props.data.length - 1}
-                  formInstance={fmk}
-                  isPending={props.isPending}
-                  submitButtonContainerProps={props.submitButtonContainerProps}
-                  containerProps={props.footerContainerProps}
-                  submitButtonProps={props.submitButtonProps}
-                  backButtonProps={props.backButtonProps}
-                  submitLabel={props.submitLabel}
-                  continueLabel={props.continueLabel}
-                  skipLabel={props.skipLabel}
-                  disableBack={props.disableBack}
-                 />
-              )}
-            </>
-          )}
+        <Flex
+          p="xl"
+          style={{
+            position: props.fixedFooter ? "fixed" : "relative",
+            bottom: 0,
+            left: 0,
+            zIndex: props.fixedFooter ? 9 : 0,
+          }}
+          justify={"center"}
+          w="100%"
+          bg="var(--mantine-primary-color-0)"
+          {...props.footerContainerWrapperProps}
+        >
+          <Flex
+            w={{ base: "100%", sm: 720 }}
+            justify={"right"}
+            {...props.footerContainerProps}
+          >
+            {!props.hideSubmit && (
+              <>
+                {props.getSubmitComponent ? (
+                  props.getSubmitComponent(fmk)
+                ) : (
+                  <CFormFooter
+                    currentIndex={currentIndex}
+                    handleContinue={handleContinue}
+                    handleBack={handleBack}
+                    singleQuestion={props.singleQuestion}
+                    data={props.data[currentIndex]}
+                    totalQuestions={props.data.length - 1}
+                    formInstance={fmk}
+                    isPending={props.isPending}
+                    submitButtonContainerProps={
+                      props.submitButtonContainerProps
+                    }
+                    containerProps={props.footerContainerProps}
+                    submitButtonProps={props.submitButtonProps}
+                    backButtonProps={props.backButtonProps}
+                    submitLabel={props.submitLabel}
+                    continueLabel={props.continueLabel}
+                    skipLabel={props.skipLabel}
+                    disableBack={props.disableBack}
+                  />
+                )}
+              </>
+            )}
           </Flex>
         </Flex>
       </Stack>

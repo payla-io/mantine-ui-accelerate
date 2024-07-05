@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PopoverOptions from "../src/ui/PopoverOptions";
+import { CPopoverOptions } from "../src/ui/CPopoverOptions";
 import React from "react";
 import { IconStar } from "@tabler/icons-react";
 import { Box } from "@mantine/core";
 
-const meta: Meta<typeof PopoverOptions> = {
-  component: PopoverOptions,
+const meta: Meta<typeof CPopoverOptions> = {
+  component: CPopoverOptions,
 };
 
 export default meta;
-type Story = StoryObj<typeof PopoverOptions>;
+type Story = StoryObj<typeof CPopoverOptions>;
 
 export const Basic: Story = {
   args: {

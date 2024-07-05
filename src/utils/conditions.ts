@@ -2,7 +2,7 @@ import { IOption } from "../ui/CForm/types"
 import { IKeyValue } from "../ui/TableData/types"
 
 
-function isValidUrl(value: string) {
+export function isValidUrl(value: string) {
     const pattern = new RegExp(
       '^([a-zA-Z]+:\\/\\/)?' +
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +

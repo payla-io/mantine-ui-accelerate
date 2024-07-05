@@ -10,7 +10,7 @@ import {
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
 
-export interface PopoverOptionsProps {
+export interface CPopoverOptionsProps {
   selectedOptions?: any[];
   trigger?: React.ReactNode;
   triggerSelected?: React.ReactNode;
@@ -28,7 +28,7 @@ export interface PopoverOptionsProps {
   title?: string;
 }
 
-export default function PopoverOptions(props: Readonly<PopoverOptionsProps>) {
+export function CPopoverOptions(props: Readonly<CPopoverOptionsProps>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState(props.selectedOptions ?? []);
   const showSearch = (props.options.length ?? 0) > 5;

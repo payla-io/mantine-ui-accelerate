@@ -1,13 +1,14 @@
 import { ActionIcon, TextInput, TextInputProps } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
+import React from "react";
 
-export interface SearchInputProps {
+export interface CSearchInputProps {
   value?: string;
   onChange?: (value: string) => void;
   onClick?: () => void;
   inputProps?: TextInputProps;
 }
-export default function SearchInput(props: Readonly<SearchInputProps>) {
+export function CSearchInput(props: Readonly<CSearchInputProps>) {
   return (
     <TextInput
       flex={1}

@@ -6,18 +6,18 @@ import {
   Title,
   TitleProps,
 } from "@mantine/core";
-import ItemList, { ItemListProps } from "./ItemList";
+import { CItemList, CItemListProps } from "./CItemList";
 import React from "react";
 
-interface ItemListSectionProps {
+export interface CItemListSectionProps {
   title?: string;
   titleProps?: TitleProps;
   cardProps?: CardProps;
-  itemListProps: ItemListProps;
+  itemListProps: CItemListProps;
   containerProps?: BoxProps;
 }
 
-export default function ItemListSection(props: Readonly<ItemListSectionProps>) {
+export function CItemListSection(props: Readonly<CItemListSectionProps>) {
   return (
     <Box {...props.containerProps}>
       {props.title && (
@@ -26,7 +26,7 @@ export default function ItemListSection(props: Readonly<ItemListSectionProps>) {
         </Title>
       )}
       <Card radius={0} {...props.cardProps}>
-        <ItemList {...props.itemListProps} />
+        <CItemList {...props.itemListProps} />
       </Card>
     </Box>
   );

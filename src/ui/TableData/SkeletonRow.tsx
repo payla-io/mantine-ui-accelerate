@@ -7,7 +7,7 @@ interface SkeletonRowProps {
   containerProps?: StackProps;
 }
 
-export default function SkeletonRow(props: Readonly<SkeletonRowProps>) {
+export function SkeletonRow(props: Readonly<SkeletonRowProps>) {
   return (
     <Stack gap="sm" my="sm" {...props.containerProps}>
       {[...Array(props.count ?? 1)].map((_t, i) => (

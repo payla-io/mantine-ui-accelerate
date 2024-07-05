@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import CCopyButton from '../src/ui/CCopyButton';
-
+import type { Meta, StoryObj } from "@storybook/react";
+import { CCopyButton } from "../src/ui/CCopyButton";
 
 const meta: Meta<typeof CCopyButton> = {
   component: CCopyButton,

@@ -7,23 +7,22 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import DataSort from "./DataSort";
-import DataFilter from "./DataFilter";
-import { useEffect, useState } from "react";
+import { DataSort } from "./DataSort";
+import { DataFilter } from "./DataFilter";
+import React, { useEffect, useState } from "react";
 import {
   DataFilterProps,
   IKeyValue,
-  IOption,
   IOrderBy,
   ITableDataColumn,
   TableDataProps,
 } from "./types";
-import SkeletonRow from "./SkeletonRow";
+import { SkeletonRow } from "./SkeletonRow";
 import { IconDots, IconEye } from "@tabler/icons-react";
-import PopoverOptions from "../PopoverOptions";
-import Item from "../Item";
-import useUniqueOptions from "../../hooks/useUniqueOptions";
-import React from "react";
+import { CPopoverOptions } from "../CPopoverOptions";
+import { CItem } from "../CItem";
+import { useUniqueOptions } from "../../hooks/useUniqueOptions";
+import { IOption } from "../CForm/types";
 
 const renderValue = (item: IKeyValue, fieldName?: string) => {
   return (
@@ -33,7 +32,7 @@ const renderValue = (item: IKeyValue, fieldName?: string) => {
   );
 };
 
-const TableData = ({
+export const TableData = ({
   columns,
   data,
   searchTerm,
@@ -240,7 +239,7 @@ const TableData = ({
             })}
             {enableColumnVisibility && (
               <Table.Th>
-                <PopoverOptions
+                <CPopoverOptions
                   trigger={
                     <ActionIcon
                       variant="subtle"
@@ -258,7 +257,7 @@ const TableData = ({
                   }}
                   renderItem={(option, onSelect, isSelected) => {
                     return (
-                      <Item
+                      <CItem
                         key={option.label}
                         label={option.label}
                         containerProps={{
@@ -383,5 +382,3 @@ const TableData = ({
     </>
   );
 };
-
-export default TableData;

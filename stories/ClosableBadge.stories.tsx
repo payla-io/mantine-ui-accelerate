@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import ClosableBadge from '../src/ui/ClosableBadge';
-
+import type { Meta, StoryObj } from "@storybook/react";
+import { ClosableBadge } from "../src/ui/ClosableBadge";
 
 const meta: Meta<typeof ClosableBadge> = {
   component: ClosableBadge,

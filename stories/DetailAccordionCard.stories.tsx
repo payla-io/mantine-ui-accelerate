@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import DetailAccordionCard from "../src/ui/DetailAccordionCard";
+import { CDetailAccordionCard } from "../src/ui/CDetailAccordionCard";
 import React from "react";
 import { Button, Text } from "@mantine/core";
 
-const meta: Meta<typeof DetailAccordionCard> = {
-  component: DetailAccordionCard,
+const meta: Meta<typeof CDetailAccordionCard> = {
+  component: CDetailAccordionCard,
 };
 
 export default meta;
-type Story = StoryObj<typeof DetailAccordionCard>;
+type Story = StoryObj<typeof CDetailAccordionCard>;
 
 export const Basic: Story = {
   args: {

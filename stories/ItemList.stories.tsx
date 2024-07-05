@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ItemList from "../src/ui/ItemList";
+import { CItemList } from "../src/ui/CItemList";
 import React from "react";
 import { Box, Text } from "@mantine/core";
 import { IconStar } from "@tabler/icons-react";
 
-const meta: Meta<typeof ItemList> = {
-  component: ItemList,
+const meta: Meta<typeof CItemList> = {
+  component: CItemList,
 };
 
 export default meta;
-type Story = StoryObj<typeof ItemList>;
+type Story = StoryObj<typeof CItemList>;
 
 export const Basic: Story = {
   args: {

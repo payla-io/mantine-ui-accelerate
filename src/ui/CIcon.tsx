@@ -1,12 +1,12 @@
 import { Image, ImageProps } from "@mantine/core";
 import React from "react";
 
-interface CIconProps {
+export interface CIconProps {
   src: string;
   size?: number;
   imageProps?: ImageProps;
 }
-export default function CIcon(props: Readonly<CIconProps>) {
+export function CIcon(props: Readonly<CIconProps>) {
   return (
     <Image
       src={props.src}

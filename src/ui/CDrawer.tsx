@@ -2,7 +2,7 @@ import { Anchor, AnchorProps, Drawer, DrawerProps } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React from "react";
 
-interface CDrawerProps {
+export interface CDrawerProps {
   anchorProps?: AnchorProps;
   anchorLabel: string | React.ReactNode;
   drawerProps?: Partial<DrawerProps>;
@@ -12,7 +12,7 @@ interface CDrawerProps {
   getHeader?: (close: () => void) => React.ReactNode;
 }
 
-export default function CDrawer(props: Readonly<CDrawerProps>) {
+export function CDrawer(props: Readonly<CDrawerProps>) {
   const [opened, { open, close }] = useDisclosure(false);
 
   return (

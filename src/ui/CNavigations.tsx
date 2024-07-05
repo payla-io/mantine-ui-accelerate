@@ -1,46 +1,44 @@
 import { Box, Stack, ActionIcon } from "@mantine/core";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
 import { CNavLink } from "./CNavLink";
 import React from "react";
 
-interface INav {
+export interface CNavigationsLink {
   label: string;
   icon?: JSX.Element;
   href: string;
   onClick?: () => void;
   hidden?: boolean;
-  children?: INav[];
+  children?: CNavigationsLink[];
 }
 
-interface NavigationsProps {
+export interface CNavigationsProps {
   setMinimisedNav?: (minimised: boolean) => void;
   minimisedNav?: boolean;
-  links: INav[];
+  links: CNavigationsLink[];
   component?: any;
 }
 
-export default function Navigations(props: Readonly<NavigationsProps>) {
-  const renderNav = (nav: INav, index: number) => {
+export function CNavigations(props: Readonly<CNavigationsProps>) {
+  const renderNav = (nav: CNavigationsLink, index: number) => {
+    const { children, ...rest } = nav;
     if (nav.hidden) return null;
     const isActive = nav.children?.length
       ? window.location.pathname.includes(nav.href)
       : window.location.pathname === nav.href;
     return (
       <CNavLink
-        to={nav.href}
-        onClick={nav.onClick}
         key={index}
-        label={nav.label}
         leftSection={nav.icon}
         childrenOffset={28}
         component={props.component ?? "a"}
         minimised={props.minimisedNav}
         active={isActive}
+        {...rest}
       >
-        {nav.children &&
+        {children &&
           !props.minimisedNav &&
-          nav.children.map((child, i) => renderNav(child, i))}
+          children.map((child, i) => renderNav(child, i))}
       </CNavLink>
     );
   };

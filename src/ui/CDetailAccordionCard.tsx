@@ -1,15 +1,15 @@
 import { Accordion, Card, Flex, Title } from "@mantine/core";
 import React from "react";
 
-interface DetailAccordionCardProps {
+export interface CDetailAccordionCardProps {
   title: string;
   headerRight?: React.ReactNode;
   children: React.ReactNode;
   cardProps?: React.ComponentProps<typeof Card>;
   closeByDefault?: boolean;
 }
-export default function DetailAccordionCard(
-  props: Readonly<DetailAccordionCardProps>,
+export function CDetailAccordionCard(
+  props: Readonly<CDetailAccordionCardProps>
 ) {
   return (
     <Card {...props.cardProps}>

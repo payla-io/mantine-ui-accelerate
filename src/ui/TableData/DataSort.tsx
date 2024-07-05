@@ -3,7 +3,7 @@ import { IconArrowNarrowDown, IconArrowNarrowUp } from "@tabler/icons-react";
 import { DataSortingProps } from "./types";
 import React, { useState } from "react";
 
-export default function DataSort({
+export function DataSort({
   column,
   orderBy,
   onChange,

@@ -1,11 +1,6 @@
 import React from "react";
 import { TableProps, TextProps } from "@mantine/core";
 
-export interface IOption {
-  value: string | number;
-  label: string;
-}
-
 export interface DataFilterProps {
   valueField?: string;
   labelField?: string;

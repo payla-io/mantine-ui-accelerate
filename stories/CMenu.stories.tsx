@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CMenu from "../src/ui/CMenu";
+import { CMenu } from "../src/ui/CMenu";
 import { ActionIcon, Button } from "@mantine/core";
 import React from "react";
 import { IconDotsVertical } from "@tabler/icons-react";

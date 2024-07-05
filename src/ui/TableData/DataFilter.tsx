@@ -1,9 +1,10 @@
 import { Checkbox, Popover, Stack, Input, Box } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
-import { DataFilterProps, IOption } from "./types";
+import { DataFilterProps } from "./types";
 import React, { useEffect, useState } from "react";
+import { IOption } from "../CForm/types";
 
-export default function DataFilter({
+export function DataFilter({
   selectedOptions,
   options,
   renderLabel,

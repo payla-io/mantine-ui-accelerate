@@ -1,10 +1,10 @@
 import { Flex, FlexProps } from "@mantine/core";
-import Item, { ItemProps } from "./Item";
+import { CItem, CItemProps } from "./CItem";
 import React from "react";
 
-export interface ItemListProps {
-  items: ItemProps[];
-  defaultItemProps?: Partial<ItemProps>;
+export interface CItemListProps {
+  items: CItemProps[];
+  defaultItemProps?: Partial<CItemProps>;
   gap?: string;
   align?: string;
   justify?: string;
@@ -13,7 +13,7 @@ export interface ItemListProps {
   reverse?: boolean;
 }
 
-export default function ItemList(props: Readonly<ItemListProps>) {
+export function CItemList(props: Readonly<CItemListProps>) {
   const direction = props.horizontal ? "row" : "column";
   const reverseDirection: FlexProps["direction"] = props.reverse
     ? `${direction}-reverse`
@@ -27,7 +27,7 @@ export default function ItemList(props: Readonly<ItemListProps>) {
       justify={props.justify}
     >
       {props.items.map((item) => (
-        <Item key={item.label} {...props.defaultItemProps} {...item} />
+        <CItem key={item.label} {...props.defaultItemProps} {...item} />
       ))}
     </Flex>
   );

@@ -6,7 +6,7 @@ interface UseUniqueOptionsProps {
   labelField?: string;
 }
 
-const useUniqueOptions = ({
+export const useUniqueOptions = ({
   data,
   valueField,
   labelField,
@@ -51,5 +51,3 @@ const useUniqueOptions = ({
     options: getUniqueOptions(valueField, labelField),
   };
 };
-
-export default useUniqueOptions;
