@@ -1,7 +1,15 @@
 {
     "extends": "@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
-        "jsx": "preserve"
+        "strict": true,
+        "noImplicitAny": true,
+        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react",
+        "outDir": "dist",
     },
     "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "exclude": ["node_modules"]
 }

@@ -1,28 +1,31 @@
 {
   "name": "@payla-io/mantine-ui-accelerate",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Collection of mantine ui components to help you accelerate your development",
-  "main": "src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "tsup"
   },
   "author": "payla-io",
   "license": "MIT",
+  "keywords": [
+    "mantine",
+    "react",
+    "ui",
+    "components"
+  ],
+  "homepage": "https://github.com/payla-io/mantine-ui-accelerate",
   "repository": {
-    "type": "git",
-    "url": "git@github.com/payla-io/mantine-ui-accelerate.git"
+    "url": "https://github.com/payla-io/mantine-ui-accelerate"
   },
   "bugs": {
     "url": "https://github.com/payla-io/mantine-ui-accelerate/issues"
   },
-  "directories": {
-    "src": "src"
-  },
-  "files": [
-    "src/**/*"
-  ],
   "resolutions": {
     "jackspeak": "2.1.1"
   },
@@ -42,6 +45,7 @@
     "storybook": "^8.1.10",
     "storybook-addon-mantine": "^4.0.2",
     "storybook-dark-mode": "^4.0.1",
+    "tsup": "^8.1.0",
     "typescript": "^5.4.5",
     "vite": "^5.3.1"
   },

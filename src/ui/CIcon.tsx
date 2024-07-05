@@ -1,4 +1,5 @@
 import { Image, ImageProps } from "@mantine/core";
+import React from "react";
 
 interface CIconProps {
   src: string;

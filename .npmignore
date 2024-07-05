@@ -1,1 +1,11 @@
 src
+stories
+.storybook
+node_modules
+.vscode
+*storybook.log
+.DS_Store
+tsconfig.json
+.gitignore
+tsup.config.ts
+.nvmrc

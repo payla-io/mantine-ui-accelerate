@@ -1,7 +1,5 @@
 import React from "react";
-import { ITableDColumn } from "../Lists/types";
 import { TableProps, TextProps } from "@mantine/core";
-
 
 export interface IOption {
   value: string | number;
@@ -19,6 +17,15 @@ export interface DataFilterProps {
   renderLabel?: (option: IOption) => React.ReactNode;
 }
 
+export interface ITableDColumn {
+  fieldName?: string;
+  label: string | React.ReactNode;
+  renderValue?: (item: object) => React.ReactNode | string | number;
+  getValue?: (item: object) => string;
+  filter?: DataFilterProps;
+  sorting?: string;
+}
+
 export interface IOrderBy {
   column: ITableDColumn;
   direction: string;
@@ -29,7 +36,6 @@ export interface DataSortingProps {
   column: ITableDColumn;
   orderBy: IOrderBy | undefined;
 }
-
 
 export interface IKeyValue {
   [key: string]: string;

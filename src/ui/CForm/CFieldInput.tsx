@@ -18,6 +18,7 @@ import CSelect from "./CSelect";
 import { ICondition } from "../../utils/conditions";
 import CTextInput from "./CTextInput";
 import CDateInputPicker from "./CDateInputPicker";
+import React from "react";
 
 export interface CFieldInputProps {
   name: string;
@@ -58,7 +59,11 @@ export default function CFieldInput(props: Readonly<CFieldInputProps>) {
   return (
     <Stack align={props.align}>
       {props.label && <Text size="md">{props.label}</Text>}
-      {props.description && <Text size="xs" c="dimmed">{props.description}</Text>}
+      {props.description && (
+        <Text size="xs" c="dimmed">
+          {props.description}
+        </Text>
+      )}
       <Box>
         <FieldComponent
           name={props.name}
@@ -66,8 +71,12 @@ export default function CFieldInput(props: Readonly<CFieldInputProps>) {
           {...props.formInstance?.getInputProps(props.name)}
           {...props.inputProps}
         />
-        
-        {props.helpText && <Text size="xs" c="dimmed" m="0">{props.helpText}</Text>}
+
+        {props.helpText && (
+          <Text size="xs" c="dimmed" m="0">
+            {props.helpText}
+          </Text>
+        )}
       </Box>
     </Stack>
   );
