@@ -15,7 +15,6 @@ export * from "./ui/CForm/CTextArea";
 export * from "./ui/CForm/CTextInput";
 export * from "./ui/CForm/types";
 export * from "./ui/TableData";
-export * from "./ui/TableData";
 export * from "./ui/TableData/DataFilter";
 export * from "./ui/TableData/DataSort";
 export * from "./ui/TableData/InfiniteScrollTable";

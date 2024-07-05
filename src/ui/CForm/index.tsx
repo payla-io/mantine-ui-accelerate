@@ -2,7 +2,7 @@ import { UseFormReturnType, useForm, isEmail, isNotEmpty } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Button, Flex, Grid, Stack } from "@mantine/core";
 import { ICFormField } from "./types";
-import CFieldInput from "./CFieldInput";
+import { CFieldInput } from "./CFieldInput";
 import { CFormFooter } from "./CFormFooter";
 import { validateConditions } from "../../utils/conditions";
 

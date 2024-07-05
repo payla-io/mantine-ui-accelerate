@@ -63,4 +63,5 @@ export interface TableDataProps {
   enablePageJump?: boolean;
   enableColumnVisibility?: boolean;
   onPaginationChange?: (page: number) => void;
+  defaultOrderBy?: IOrderBy;
 }

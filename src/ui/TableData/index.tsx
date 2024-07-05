@@ -49,11 +49,14 @@ export const TableData = ({
   enablePageJump,
   enableColumnVisibility,
   onPaginationChange,
+  defaultOrderBy,
 }: TableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
   const [page, setPage] = useState(1);
   const [skeletonCount, setSkeletonCount] = useState(5);
-  const [orderBy, setOrderBy] = useState<IOrderBy>();
+  const [orderBy, setOrderBy] = useState<IOrderBy>(
+    defaultOrderBy || { column: columns[0], direction: "asc" }
+  );
   const unique = useUniqueOptions({ data });
   const [selectedIndex, setSelectedIndex] = useState<number>();
   const [selectedColumns, setSelectedColumns] = useState<ITableDataColumn[]>(
@@ -293,8 +296,10 @@ export const TableData = ({
               style={{
                 borderStyle: "hidden",
                 cursor: onRowClick ? "pointer" : "auto",
-                color:
-                  selectedIndex === i && flagSelectedRow ? "red" : undefined,
+                backgroundColor:
+                  selectedIndex === i && flagSelectedRow
+                    ? "var(--table-selected-row-color)"
+                    : undefined,
               }}
               onClick={() => {
                 if (onRowClick) {
