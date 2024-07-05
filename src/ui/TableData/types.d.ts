@@ -1,7 +1,8 @@
 import React from "react";
 import { TableProps, TextProps } from "@mantine/core";
+import { IOption } from "../CForm/types";
 
-export interface DataFilterProps {
+export interface CDataFilterProps {
   valueField?: string;
   labelField?: string;
   getLabel?: (option: IOption) => string;
@@ -12,31 +13,7 @@ export interface DataFilterProps {
   renderLabel?: (option: IOption) => React.ReactNode;
 }
 
-export interface ITableDColumn {
-  fieldName?: string;
-  label: string | React.ReactNode;
-  renderValue?: (item: object) => React.ReactNode | string | number;
-  getValue?: (item: object) => string;
-  filter?: DataFilterProps;
-  sorting?: string;
-}
-
-export interface IOrderBy {
-  column: ITableDColumn;
-  direction: string;
-}
-
-export interface DataSortingProps {
-  onChange?: (column: ITableDColumn, direction: string) => void;
-  column: ITableDColumn;
-  orderBy: IOrderBy | undefined;
-}
-
-export interface IKeyValue {
-  [key: string]: string;
-}
-
-export interface ITableDataColumn {
+export interface CTableDataColumn {
   fieldName?: string;
   label: string | React.ReactNode;
   renderValue?: (item: any) => React.ReactNode | string | number;
@@ -46,10 +23,25 @@ export interface ITableDataColumn {
   hidden?: boolean;
 }
 
-export interface TableDataProps {
+export interface IOrderBy {
+  column: CTableDataColumn;
+  direction: string;
+}
+
+export interface CDataSortingProps {
+  onChange?: (column: CTableDataColumn, direction: string) => void;
+  column: CTableDataColumn;
+  orderBy: IOrderBy | undefined;
+}
+
+export interface IKeyValue {
+  [key: string]: string;
+}
+
+export interface CTableDataProps {
   data: any[];
   searchTerm?: string;
-  columns: ITableDataColumn[];
+  columns: CTableDataColumn[];
   paginationSize?: number;
   dataCount?: number;
   getFilterValue?: (item: any, filterName: string) => string;

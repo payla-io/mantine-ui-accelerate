@@ -11,11 +11,11 @@ import { DataSort } from "./DataSort";
 import { DataFilter } from "./DataFilter";
 import React, { useEffect, useState } from "react";
 import {
-  DataFilterProps,
+  CDataFilterProps,
   IKeyValue,
   IOrderBy,
-  ITableDataColumn,
-  TableDataProps,
+  CTableDataColumn,
+  CTableDataProps,
 } from "./types";
 import { SkeletonRow } from "./SkeletonRow";
 import { IconDots, IconEye } from "@tabler/icons-react";
@@ -50,7 +50,7 @@ export const TableData = ({
   enableColumnVisibility,
   onPaginationChange,
   defaultOrderBy,
-}: TableDataProps) => {
+}: CTableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
   const [page, setPage] = useState(1);
   const [skeletonCount, setSkeletonCount] = useState(5);
@@ -59,7 +59,7 @@ export const TableData = ({
   );
   const unique = useUniqueOptions({ data });
   const [selectedIndex, setSelectedIndex] = useState<number>();
-  const [selectedColumns, setSelectedColumns] = useState<ITableDataColumn[]>(
+  const [selectedColumns, setSelectedColumns] = useState<CTableDataColumn[]>(
     columns.filter((col) => !col.hidden)
   );
 
@@ -67,7 +67,7 @@ export const TableData = ({
     setSelectedIndex(selectedRow);
   }, [selectedRow]);
 
-  const getFilterProps = (filter: DataFilterProps, fieldName: string) => {
+  const getFilterProps = (filter: CDataFilterProps, fieldName: string) => {
     if (filter) {
       const { valueField, labelField, ...rest } = filter;
       if (!rest.options) {
@@ -98,7 +98,7 @@ export const TableData = ({
     setSelectedFilter({ ...selectedFilter, [filterName]: options });
   };
 
-  const handleOnSortChange = (column: ITableDataColumn, direction: string) => {
+  const handleOnSortChange = (column: CTableDataColumn, direction: string) => {
     setOrderBy({ column, direction });
   };
 
@@ -135,7 +135,7 @@ export const TableData = ({
     }
   };
 
-  const getContentPaddingLeft = (column: ITableDataColumn) => {
+  const getContentPaddingLeft = (column: CTableDataColumn) => {
     return column.filter ? 32 : 40;
   };
 

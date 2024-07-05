@@ -1,12 +1,12 @@
 import { Skeleton } from "@mantine/core";
-import { TableDataProps } from "./types";
+import { CTableDataProps } from "./types";
 import InfiniteScroll, {
   Props as InfiniteScrollProps,
 } from "react-infinite-scroll-component";
 import { TableData } from ".";
 import React from "react";
 
-export interface InfiniteScrollTableProps extends TableDataProps {
+export interface InfiniteScrollTableProps extends CTableDataProps {
   loadMore?: () => void;
   hasNextPage?: boolean;
   infiniteScrollProps?: InfiniteScrollProps;

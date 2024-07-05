@@ -1,6 +1,6 @@
 import { Checkbox, Popover, Stack, Input, Box } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
-import { DataFilterProps } from "./types";
+import { CDataFilterProps } from "./types";
 import React, { useEffect, useState } from "react";
 import { IOption } from "../CForm/types";
 
@@ -9,7 +9,7 @@ export function DataFilter({
   options,
   renderLabel,
   onChange,
-}: Readonly<DataFilterProps>) {
+}: Readonly<CDataFilterProps>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selected, setSelected] = useState(selectedOptions ?? []);
   const showSearch = (options?.length ?? 0) > 5;
