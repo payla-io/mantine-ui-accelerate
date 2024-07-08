@@ -51,6 +51,7 @@ export const TableData = ({
   onPaginationChange,
   defaultOrderBy,
 }: CTableDataProps) => {
+  console.log("TableData -> columns", columns);
   const [selectedFilter, setSelectedFilter] = useState<any>({});
   const [page, setPage] = useState(1);
   const [skeletonCount, setSkeletonCount] = useState(5);
@@ -213,7 +214,10 @@ export const TableData = ({
         <Table.Thead>
           <Table.Tr data-cy="table-headers">
             {columns.map((column, i) => {
-              if (!selectedColumns.some((col) => col.label === column.label))
+              if (
+                typeof column.label === "string" &&
+                !selectedColumns.some((col) => col.label === column.label)
+              )
                 return null;
               return (
                 <Table.Th key={i}>
@@ -259,6 +263,7 @@ export const TableData = ({
                     setSelectedColumns(selected);
                   }}
                   renderItem={(option, onSelect, isSelected) => {
+                    if (typeof option.label !== "string") return null;
                     return (
                       <CItem
                         key={option.label}
@@ -309,7 +314,10 @@ export const TableData = ({
               }}
             >
               {columns.map((column, i) => {
-                if (!selectedColumns.some((col) => col.label === column.label))
+                if (
+                  typeof column.label === "string" &&
+                  !selectedColumns.some((col) => col.label === column.label)
+                )
                   return null;
                 return (
                   <Table.Td
