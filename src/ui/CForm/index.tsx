@@ -36,6 +36,7 @@ export interface CFormProps {
   backButtonProps?: React.ComponentProps<typeof Button>;
   fullHeight?: boolean;
   isPending?: boolean;
+  noFooter?: boolean;
   errorMessages?: Record<string, string>;
   setFormInstance?: (
     formInstance: UseFormReturnType<
@@ -46,6 +47,7 @@ export interface CFormProps {
   onValueChange?: (values: {
     [key: string]: ICFormField["initialValue"];
   }) => void;
+  onCurrentIndexChange?: (currentIndex: number) => void;
 }
 
 export function CForm(props: Readonly<CFormProps>) {
@@ -156,6 +158,10 @@ export function CForm(props: Readonly<CFormProps>) {
     if (props.onValueChange) props.onValueChange(fmk.values);
   }, [fmk.values, props.onValueChange]);
 
+  useEffect(() => {
+    if (props.onCurrentIndexChange) props.onCurrentIndexChange(currentIndex);
+  }, [currentIndex, props]);
+
   return (
     <Box
       component={props.noFormTag ? "div" : "form"}
@@ -240,6 +246,7 @@ export function CForm(props: Readonly<CFormProps>) {
                     continueLabel={props.continueLabel}
                     skipLabel={props.skipLabel}
                     disableBack={props.disableBack}
+                    noFooter={props.noFooter}
                   />
                 )}
               </>

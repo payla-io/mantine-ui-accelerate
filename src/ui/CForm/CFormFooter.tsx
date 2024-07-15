@@ -18,6 +18,7 @@ export interface CFormFooterProps {
   submitLabel?: string;
   continueLabel?: string;
   skipLabel?: string;
+  noFooter?: boolean;
   disableBack?: boolean;
   containerProps?: React.ComponentProps<typeof Flex>;
   backButtonProps?: React.ComponentProps<typeof Button>;
@@ -43,7 +44,7 @@ export function CFormFooter(props: Readonly<CFormFooterProps>) {
       setButtonType("button");
     }
   }, [lastQuestion]);
-
+  if (props.noFooter) return null;
   return (
     <Flex justify={"right"} w="100%" gap={"xs"} {...props.containerProps}>
       {props.singleQuestion && props.currentIndex > 0 && !props.disableBack && (
