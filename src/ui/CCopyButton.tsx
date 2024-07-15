@@ -13,7 +13,11 @@ export function CCopyButton(props: Readonly<CCopyButtonProps>) {
     <CopyButton value={props.value}>
       {({ copied, copy }) => (
         <Tooltip
-          label={copied ? props.copiedText : props.copyText}
+          label={
+            copied
+              ? props.copiedText ?? "Copied"
+              : props.copyText ?? "Copy to clipboard"
+          }
           color="var(--mantine-primary-color-9)"
           withArrow
         >

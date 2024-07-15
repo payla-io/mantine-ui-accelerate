@@ -18,7 +18,7 @@ export interface CTableDataColumn {
   label: string | React.ReactNode;
   renderValue?: (item: any) => React.ReactNode | string | number;
   getValue?: (item: any) => string;
-  filter?: DataFilterProps;
+  filter?: CDataFilterProps;
   sorting?: string;
   hidden?: boolean;
 }
