@@ -204,55 +204,56 @@ export function CForm(props: Readonly<CFormProps>) {
             );
           })}
         </Grid>
-        <Flex
-          p="xl"
-          style={{
-            position: props.fixedFooter ? "fixed" : "relative",
-            bottom: 0,
-            left: 0,
-            zIndex: props.fixedFooter ? 9 : 0,
-          }}
-          justify={"center"}
-          w="100%"
-          bg="var(--mantine-primary-color-0)"
-          {...props.footerContainerWrapperProps}
-        >
+        {!props.noFooter && (
           <Flex
-            w={{ base: "100%", sm: 720 }}
-            justify={"right"}
-            {...props.footerContainerProps}
+            p="xl"
+            style={{
+              position: props.fixedFooter ? "fixed" : "relative",
+              bottom: 0,
+              left: 0,
+              zIndex: props.fixedFooter ? 9 : 0,
+            }}
+            justify={"center"}
+            w="100%"
+            bg="var(--mantine-primary-color-0)"
+            {...props.footerContainerWrapperProps}
           >
-            {!props.hideSubmit && (
-              <>
-                {props.getSubmitComponent ? (
-                  props.getSubmitComponent(fmk)
-                ) : (
-                  <CFormFooter
-                    currentIndex={currentIndex}
-                    handleContinue={handleContinue}
-                    handleBack={handleBack}
-                    singleQuestion={props.singleQuestion}
-                    data={props.data[currentIndex]}
-                    totalQuestions={props.data.length - 1}
-                    formInstance={fmk}
-                    isPending={props.isPending}
-                    submitButtonContainerProps={
-                      props.submitButtonContainerProps
-                    }
-                    containerProps={props.footerContainerProps}
-                    submitButtonProps={props.submitButtonProps}
-                    backButtonProps={props.backButtonProps}
-                    submitLabel={props.submitLabel}
-                    continueLabel={props.continueLabel}
-                    skipLabel={props.skipLabel}
-                    disableBack={props.disableBack}
-                    noFooter={props.noFooter}
-                  />
-                )}
-              </>
-            )}
+            <Flex
+              w={{ base: "100%", sm: 720 }}
+              justify={"right"}
+              {...props.footerContainerProps}
+            >
+              {!props.hideSubmit && (
+                <>
+                  {props.getSubmitComponent ? (
+                    props.getSubmitComponent(fmk)
+                  ) : (
+                    <CFormFooter
+                      currentIndex={currentIndex}
+                      handleContinue={handleContinue}
+                      handleBack={handleBack}
+                      singleQuestion={props.singleQuestion}
+                      data={props.data[currentIndex]}
+                      totalQuestions={props.data.length - 1}
+                      formInstance={fmk}
+                      isPending={props.isPending}
+                      submitButtonContainerProps={
+                        props.submitButtonContainerProps
+                      }
+                      containerProps={props.footerContainerProps}
+                      submitButtonProps={props.submitButtonProps}
+                      backButtonProps={props.backButtonProps}
+                      submitLabel={props.submitLabel}
+                      continueLabel={props.continueLabel}
+                      skipLabel={props.skipLabel}
+                      disableBack={props.disableBack}
+                    />
+                  )}
+                </>
+              )}
+            </Flex>
           </Flex>
-        </Flex>
+        )}
       </Stack>
     </Box>
   );
