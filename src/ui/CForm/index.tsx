@@ -83,7 +83,7 @@ export function CForm(props: Readonly<CFormProps>) {
         const message = isNotEmpty(
           props.errorMessages?.required ?? "This field is required"
         )(value);
-        if (field.inputProps.required && message) {
+        if (field.inputProps?.required && message) {
           return message;
         }
         if (field.inputType === "email" && value) {

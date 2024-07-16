@@ -5,6 +5,7 @@ export interface CLocationInputProps {
   form: any;
   value: Record<string, unknown>;
   name: string;
+  noFooter?: boolean;
 }
 
 export function CLocationInput(props: Readonly<CLocationInputProps>) {
@@ -65,6 +66,7 @@ export function CLocationInput(props: Readonly<CLocationInputProps>) {
         }
       }}
       hideSubmit
+      noFooter={props.noFooter}
     />
   );
 }
