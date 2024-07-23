@@ -27,8 +27,8 @@ export interface CSearchFilterHeaderProps {
   enableRefresh?: boolean;
   rangeFields?: string[];
   getFilterLabel?: (name: string, value: string) => string;
-  getStateFilters?: () => Record<string, IFilterItem>;
-  setStateFilters?: (filters: Record<string, IFilterItem>) => void;
+  getStateFilters: () => Record<string, IFilterItem>;
+  setStateFilters: (filters: Record<string, IFilterItem>) => void;
   formatDate?: (date: Date) => string;
 }
 
@@ -36,8 +36,8 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
   const { selected, setSelectedFilter, refreshFilters, getFilterItems } =
     useFilters({
       formatDate: props.formatDate,
-      setStateSelected: props.setStateFilters,
-      getStateSelected: props.getStateFilters,
+      setSelected: props.setStateFilters,
+      getSelected: props.getStateFilters,
     });
   const [fmk, setFmk] =
     useState<

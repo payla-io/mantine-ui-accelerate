@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { ICFormField } from "../ui/CForm/types";
 import { TextInputProps } from "@mantine/core";
 
@@ -10,27 +9,18 @@ export interface IFilterItem {
 
 interface IUseFilters {
   formatDate?: (date: Date) => string;
-  getStateSelected?: () => Record<string, IFilterItem>;
-  setStateSelected?: (selected: Record<string, IFilterItem>) => void;
+  getSelected: () => Record<string, IFilterItem>;
+  setSelected: (selected: Record<string, IFilterItem>) => void;
 }
 export const useFilters = ({
   formatDate,
-  setStateSelected,
-  getStateSelected,
+  setSelected,
+  getSelected,
 }: IUseFilters) => {
-  const [selected, setSelected] = useState<Record<string, IFilterItem>>(
-    getStateSelected ? getStateSelected() : {}
-  );
-
-  useEffect(() => {
-    if (setStateSelected) {
-      setStateSelected(selected);
-    }
-  }, [selected]);
-
   const setSelectedFilter = (name: string, filter: IFilterItem) => {
+    const currentSelected = getSelected();
     setSelected({
-      ...selected,
+      ...currentSelected,
       [name]: filter,
     });
   };
@@ -128,8 +118,9 @@ export const useFilters = ({
 
   const getFilters = () => {
     const filters: { [key: string]: string } = {};
-    Object.keys(selected).forEach((key) => {
-      const value = selected[key].value;
+    const currentSelected = getSelected();
+    Object.keys(currentSelected).forEach((key) => {
+      const value = currentSelected[key].value;
       if (value instanceof Array) {
         if (value.length === 0 || value[0] === undefined || value[0] === null)
           return;
@@ -166,7 +157,7 @@ export const useFilters = ({
     return filters;
   };
   return {
-    selected,
+    selected: getSelected(),
     setSelectedFilter,
     refreshFilters,
     getFilters,
