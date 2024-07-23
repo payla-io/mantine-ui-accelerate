@@ -18,6 +18,7 @@ import { CSelect } from "./CSelect";
 import { ICondition } from "../../utils/conditions";
 import { CTextInput } from "./CTextInput";
 import { CDateInputPicker } from "./CDateInputPicker";
+import { DatePickerInput } from "@mantine/dates";
 import React from "react";
 
 export interface CFieldInputProps {
@@ -46,7 +47,8 @@ const componentMap: Record<string, any> = {
   file: CFileUpload,
   phone: CPhoneInput,
   password: PasswordInput,
-  date: CDateInputPicker,
+  date_mask: CDateInputPicker,
+  date: DatePickerInput,
   select: CSelect,
   multi_select: MultiSelect,
   range: CRangeSlider,

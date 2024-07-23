@@ -156,11 +156,11 @@ export function CForm(props: Readonly<CFormProps>) {
 
   useEffect(() => {
     if (props.onValueChange) props.onValueChange(fmk.values);
-  }, [fmk.values, props.onValueChange]);
+  }, [fmk.values]);
 
   useEffect(() => {
     if (props.onCurrentIndexChange) props.onCurrentIndexChange(currentIndex);
-  }, [currentIndex, props]);
+  }, [currentIndex]);
 
   return (
     <Box
@@ -178,7 +178,7 @@ export function CForm(props: Readonly<CFormProps>) {
       >
         <Grid grow={props.grow} gutter={props.gutter ?? 10}>
           {props.data.map((field, index) => {
-            const { span, hidden, initialValue, ...fieldInputProps } = field;
+            const { span, hidden, ...fieldInputProps } = field;
             if (hidden || field.inputType === "label") return null;
             const { isValid } = validateConditions(
               field.visibilityConditions ?? [],
@@ -186,8 +186,6 @@ export function CForm(props: Readonly<CFormProps>) {
             );
             if (!isValid) return null;
             if (props.singleQuestion && currentIndex !== index) return null;
-            if (initialValue && !fmk.values[field.name])
-              fmk.setFieldValue(field.name, initialValue);
             return (
               <Grid.Col
                 key={field.name}
