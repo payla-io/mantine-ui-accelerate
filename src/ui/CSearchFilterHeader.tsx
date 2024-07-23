@@ -10,7 +10,7 @@ import { CDrawer } from "./CDrawer";
 import { CItem } from "./CItem";
 import { CFilterOptions } from "./CFilterOptions";
 
-interface CSearchFilterHeaderProps {
+export interface CSearchFilterHeaderProps {
   title?: string;
   titleProps?: React.ComponentProps<typeof Title>;
   searchProps?: CSearchInputProps;

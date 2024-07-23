@@ -23,6 +23,7 @@ export * from "./ui/TableData/types.d";
 export * from "./ui/CCopyButton";
 export * from "./ui/CDetailAccordionCard";
 export * from "./ui/CDrawer";
+export * from "./ui/CSearchFilterHeader";
 export * from "./ui/CFilterOptions";
 export * from "./ui/CIcon";
 export * from "./ui/CItem";
