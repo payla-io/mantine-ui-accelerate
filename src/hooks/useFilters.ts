@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ICFormField } from "../ui/CForm/types";
 import { TextInputProps } from "@mantine/core";
 
@@ -8,26 +8,38 @@ export interface IFilterItem {
   value?: ICFormField["initialValue"];
 }
 
-
-
 interface IUseFilters {
   formatDate?: (date: Date) => string;
+  getStateSelected?: () => Record<string, IFilterItem>;
+  setStateSelected?: (selected: Record<string, IFilterItem>) => void;
 }
-export const useFilters = ({formatDate}: IUseFilters) => {
-  const [selected, setSelected] = useState<Record<string, IFilterItem>>({});
+export const useFilters = ({
+  formatDate,
+  setStateSelected,
+  getStateSelected,
+}: IUseFilters) => {
+  const [selected, setSelected] = useState<Record<string, IFilterItem>>(
+    getStateSelected ? getStateSelected() : {}
+  );
+
+  useEffect(() => {
+    if (setStateSelected) {
+      setStateSelected(selected);
+    }
+  }, [selected]);
 
   const setSelectedFilter = (name: string, filter: IFilterItem) => {
     setSelected({
       ...selected,
       [name]: filter,
     });
-  }
+  };
 
   const refreshFilters = () => {
-  setSelected({});
-  }
+    setSelected({});
+  };
 
-  const getFilterItems =  (
+  const getFilterItems = (
     filter: IFilterItem,
     rangeFields?: string[],
     getFilterLabel?: (name: string, value: string) => string
@@ -51,12 +63,14 @@ export const useFilters = ({formatDate}: IUseFilters) => {
         } else {
           return [
             {
-              label: filter.value.map((v) => {
-                if (new Date(v).toString() !== "Invalid Date") {
-                  return (new Date(v)).toDateString();
-                }
-                return v;
-              }).join(" - "),
+              label: filter.value
+                .map((v) => {
+                  if (new Date(v).toString() !== "Invalid Date") {
+                    return new Date(v).toDateString();
+                  }
+                  return v;
+                })
+                .join(" - "),
               onClose: () => {
                 setSelectedFilter(filter.name, {
                   ...filter,
@@ -69,9 +83,7 @@ export const useFilters = ({formatDate}: IUseFilters) => {
       }
 
       return filter.value.map((item, i) => {
-        let label = getFilterLabel
-          ? getFilterLabel(filter.name, item)
-          : item;
+        let label = getFilterLabel ? getFilterLabel(filter.name, item) : item;
         if (typeof item === "object") {
           label = item.label;
         }
@@ -112,25 +124,23 @@ export const useFilters = ({formatDate}: IUseFilters) => {
         },
       },
     ];
-  }
+  };
 
   const getFilters = () => {
     const filters: { [key: string]: string } = {};
     Object.keys(selected).forEach((key) => {
       const value = selected[key].value;
       if (value instanceof Array) {
-        if (
-          value.length === 0 ||
-          value[0] === undefined ||
-          value[0] === null
-        )
+        if (value.length === 0 || value[0] === undefined || value[0] === null)
           return;
         if (value.every((v) => v === 0)) return;
         let prevDate: Date | null = null;
         filters[key] = value
           .map((v) => {
             if (v === null && prevDate) {
-              return formatDate ? formatDate(prevDate) : prevDate.toDateString();
+              return formatDate
+                ? formatDate(prevDate)
+                : prevDate.toDateString();
             }
             if (v instanceof Date) {
               prevDate = new Date(v);
@@ -139,8 +149,8 @@ export const useFilters = ({formatDate}: IUseFilters) => {
             if (v instanceof Object) {
               return v.value;
             }
-            if ((new Date(v)).toString() === "Invalid Date"){
-              return v
+            if (new Date(v).toString() === "Invalid Date") {
+              return v;
             }
             prevDate = new Date(v);
             return formatDate ? formatDate(v) : v.toDateString();
@@ -149,10 +159,17 @@ export const useFilters = ({formatDate}: IUseFilters) => {
       } else {
         if (!value) return;
 
-        filters[key] = value instanceof Date && formatDate ? formatDate(value) : value;
+        filters[key] =
+          value instanceof Date && formatDate ? formatDate(value) : value;
       }
     });
     return filters;
-  }
-  return { selected, setSelectedFilter, refreshFilters, getFilters, getFilterItems };
-}
+  };
+  return {
+    selected,
+    setSelectedFilter,
+    refreshFilters,
+    getFilters,
+    getFilterItems,
+  };
+};

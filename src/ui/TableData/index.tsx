@@ -51,7 +51,6 @@ export const TableData = ({
   onPaginationChange,
   defaultOrderBy,
 }: CTableDataProps) => {
-  console.log("TableData -> columns", columns);
   const [selectedFilter, setSelectedFilter] = useState<any>({});
   const [page, setPage] = useState(1);
   const [skeletonCount, setSkeletonCount] = useState(5);
