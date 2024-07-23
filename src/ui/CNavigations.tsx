@@ -6,7 +6,8 @@ import React from "react";
 export interface CNavigationsLink {
   label: string;
   icon?: JSX.Element;
-  href: string;
+  href?: string;
+  to?: string;
   onClick?: () => void;
   hidden?: boolean;
   children?: CNavigationsLink[];
@@ -24,7 +25,7 @@ export function CNavigations(props: Readonly<CNavigationsProps>) {
     const { children, ...rest } = nav;
     if (nav.hidden) return null;
     const isActive = nav.children?.length
-      ? window.location.pathname.includes(nav.href)
+      ? window.location.pathname.includes((nav.href ?? nav.to) as string)
       : window.location.pathname === nav.href;
     return (
       <CNavLink
