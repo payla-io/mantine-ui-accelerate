@@ -8,7 +8,7 @@ import {
 import { IconCalendar } from "@tabler/icons-react";
 import { DatePicker, DatePickerProps, DatePickerType } from "@mantine/dates";
 import InputMask from "react-input-mask";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CDateInputPickerProps extends TextInputProps {
   mask?: string;
@@ -18,10 +18,9 @@ interface CDateInputPickerProps extends TextInputProps {
   formatDate?: (date: string) => string;
 }
 
-
 export const parseMaskedDate = (
   dateString: string,
-  partSplit: string = ".",
+  partSplit: string = "."
 ) => {
   if (!dateString || dateString.includes("_")) return new Date();
   const parts = dateString.split(partSplit);
@@ -30,7 +29,6 @@ export const parseMaskedDate = (
   const year = parseInt(parts[2], 10);
   return new Date(year, month, day);
 };
-
 
 export function CDateInputPicker(props: Readonly<CDateInputPickerProps>) {
   const { pickerProps, formatDate, ...rest } = props;
@@ -49,31 +47,31 @@ export function CDateInputPicker(props: Readonly<CDateInputPickerProps>) {
         component={InputMask}
         rightSection={
           <Popover width={200} position="bottom" withArrow shadow="md">
-          <Popover.Target>
-            <ActionIcon variant="subtle">
-              <IconCalendar />
-            </ActionIcon>
-          </Popover.Target>
-          <Popover.Dropdown w={"290px"}>
-            <DatePicker
-              {...pickerProps}
-              value={dateValue}
-              date={dateValue}
-              onDateChange={setDateValue}
-              onChange={(v) => {
-                setDateValue(v as Date);
-                if (props.form && props.name) {
-                  props.form.setFieldValue(
-                    props.name,
-                    formatDate
-                      ? formatDate(v?.toString() as string)
-                      : (v?.toString() as string)
-                  );
-                }
-              }}
-            />
-          </Popover.Dropdown>
-        </Popover>
+            <Popover.Target>
+              <ActionIcon variant="subtle">
+                <IconCalendar />
+              </ActionIcon>
+            </Popover.Target>
+            <Popover.Dropdown w={"290px"}>
+              <DatePicker
+                {...pickerProps}
+                value={dateValue}
+                date={dateValue}
+                onDateChange={setDateValue}
+                onChange={(v) => {
+                  setDateValue(v as Date);
+                  if (props.form && props.name) {
+                    props.form.setFieldValue(
+                      props.name,
+                      formatDate
+                        ? formatDate(v?.toString() as string)
+                        : (v?.toString() as string)
+                    );
+                  }
+                }}
+              />
+            </Popover.Dropdown>
+          </Popover>
         }
         {...rest}
       />

@@ -1,7 +1,6 @@
 import { Box, Stack, ActionIcon } from "@mantine/core";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { CNavLink } from "./CNavLink";
-import React from "react";
 
 export interface CNavigationsLink {
   label: string;

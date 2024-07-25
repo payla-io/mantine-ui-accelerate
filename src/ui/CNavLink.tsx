@@ -4,7 +4,7 @@ import {
   Tooltip,
   createPolymorphicComponent,
 } from "@mantine/core";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 export interface CNavlinkProps extends NavLinkProps {
   minimised?: boolean;

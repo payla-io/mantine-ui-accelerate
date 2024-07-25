@@ -1,6 +1,5 @@
 import { ActionIcon, Badge, Flex, Text } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
-import React from "react";
 
 export interface ClosableBadgeProps {
   color?: string;

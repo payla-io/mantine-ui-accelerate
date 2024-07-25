@@ -1,5 +1,4 @@
 import { CForm } from ".";
-import React from "react";
 
 export interface CLocationInputProps {
   form: any;

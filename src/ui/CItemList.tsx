@@ -1,6 +1,5 @@
 import { Flex, FlexProps } from "@mantine/core";
 import { CItem, CItemProps } from "./CItem";
-import React from "react";
 
 export interface CItemListProps {
   items: CItemProps[];

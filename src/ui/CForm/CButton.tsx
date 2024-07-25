@@ -1,5 +1,4 @@
 import { Button, ButtonProps } from "@mantine/core";
-import React from "react";
 
 interface CButtonProps extends ButtonProps {
   inputProps: any;

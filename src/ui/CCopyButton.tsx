@@ -1,6 +1,5 @@
 import { ActionIcon, CopyButton, Tooltip } from "@mantine/core";
 import { IconCopy } from "@tabler/icons-react";
-import React from "react";
 
 export interface CCopyButtonProps {
   value: string;

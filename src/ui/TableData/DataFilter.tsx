@@ -1,7 +1,7 @@
 import { Checkbox, Popover, Stack, Input, Box } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
 import { CDataFilterProps } from "./types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IOption } from "../CForm/types";
 
 export function DataFilter({

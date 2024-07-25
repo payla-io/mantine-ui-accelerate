@@ -1,6 +1,5 @@
 import { Box, Flex, Text, TextInputProps } from "@mantine/core";
 import { ClosableBadge, ClosableBadgeProps } from "./ClosableBadge";
-import React from "react";
 
 export interface CFilterOptionsProps {
   label: TextInputProps["label"];

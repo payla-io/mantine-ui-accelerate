@@ -1,7 +1,7 @@
 import { Flex, useMantineTheme } from "@mantine/core";
 import { IconArrowNarrowDown, IconArrowNarrowUp } from "@tabler/icons-react";
 import { CDataSortingProps } from "./types";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export function DataSort({
   column,

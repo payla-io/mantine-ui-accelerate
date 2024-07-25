@@ -5,7 +5,7 @@ import {
   IconPdf,
   IconVideo,
 } from "@tabler/icons-react";
-import React, { FC } from "react";
+import { FC } from "react";
 
 export interface CUploadedFileProps {
   handleRemoveImage: () => void;

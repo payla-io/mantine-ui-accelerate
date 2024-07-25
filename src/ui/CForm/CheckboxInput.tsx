@@ -1,6 +1,5 @@
 import { Checkbox, Stack } from "@mantine/core";
 import { IOption } from "./types";
-import React from "react";
 
 interface CheckboxInputProps {
   name: string;

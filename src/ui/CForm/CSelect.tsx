@@ -1,5 +1,4 @@
 import { Select, SelectProps } from "@mantine/core";
-import React from "react";
 
 export interface CSelectProps extends SelectProps {
   form: any;

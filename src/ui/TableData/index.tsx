@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { DataSort } from "./DataSort";
 import { DataFilter } from "./DataFilter";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CDataFilterProps,
   IKeyValue,

@@ -1,5 +1,4 @@
 import { Skeleton, SkeletonProps, Stack, StackProps } from "@mantine/core";
-import React from "react";
 
 interface SkeletonRowProps {
   count?: number;

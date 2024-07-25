@@ -1,6 +1,5 @@
 import { TextInput, TextInputProps } from "@mantine/core";
 import InputMask from "react-input-mask";
-import React from "react";
 
 export interface CTextInputProps extends TextInputProps {
   mask?: string;

@@ -19,7 +19,6 @@ import { ICondition } from "../../utils/conditions";
 import { CTextInput } from "./CTextInput";
 import { CDateInputPicker } from "./CDateInputPicker";
 import { DatePickerInput } from "@mantine/dates";
-import React from "react";
 
 export interface CFieldInputProps {
   name: string;

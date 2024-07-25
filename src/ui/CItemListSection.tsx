@@ -7,7 +7,6 @@ import {
   TitleProps,
 } from "@mantine/core";
 import { CItemList, CItemListProps } from "./CItemList";
-import React from "react";
 
 export interface CItemListSectionProps {
   title?: string;
