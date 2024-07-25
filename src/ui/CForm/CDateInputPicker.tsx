@@ -15,13 +15,11 @@ interface CDateInputPickerProps extends TextInputProps {
   pickerProps?: DatePickerProps<DatePickerType>;
   form: any;
   name: string;
+  maskSeparator?: string;
   formatDate?: (date: string) => string;
 }
 
-export const parseMaskedDate = (
-  dateString: string,
-  partSplit: string = "."
-) => {
+export const parseMaskedDate = (dateString: string, partSplit: string) => {
   if (!dateString || dateString.includes("_")) return new Date();
   const parts = dateString.split(partSplit);
   const day = parseInt(parts[0], 10);
@@ -31,13 +29,13 @@ export const parseMaskedDate = (
 };
 
 export function CDateInputPicker(props: Readonly<CDateInputPickerProps>) {
-  const { pickerProps, formatDate, ...rest } = props;
+  const { pickerProps, formatDate, maskSeparator, ...rest } = props;
   const value = props.form.values[props.name];
   const [dateValue, setDateValue] = useState<Date | undefined>();
 
   useEffect(() => {
     if (value) {
-      setDateValue(parseMaskedDate(value));
+      setDateValue(parseMaskedDate(value, maskSeparator ?? "/"));
     }
   }, [value]);
 
