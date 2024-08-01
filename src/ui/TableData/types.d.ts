@@ -44,6 +44,8 @@ export interface CTableDataProps {
   columns: CTableDataColumn[];
   paginationSize?: number;
   dataCount?: number;
+  currentPage?: number;
+  onPaginationChange?: (page: number) => void;
   getFilterValue?: (item: any, filterName: string) => string;
   onRowClick?: (item: any) => void;
   tableProps?: TableProps;
@@ -54,6 +56,5 @@ export interface CTableDataProps {
   noRecordText?: string;
   enablePageJump?: boolean;
   enableColumnVisibility?: boolean;
-  onPaginationChange?: (page: number) => void;
   defaultOrderBy?: IOrderBy;
 }

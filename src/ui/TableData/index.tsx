@@ -48,11 +48,12 @@ export const TableData = ({
   dataCount,
   enablePageJump,
   enableColumnVisibility,
+  currentPage,
   onPaginationChange,
   defaultOrderBy,
 }: CTableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(currentPage ?? 1);
   const [skeletonCount, setSkeletonCount] = useState(5);
   const [orderBy, setOrderBy] = useState<IOrderBy>(
     defaultOrderBy || { column: columns[0], direction: "asc" }
