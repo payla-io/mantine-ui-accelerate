@@ -95,7 +95,7 @@ export const TableData = ({
   };
 
   const handleOnFilterChange = (filterName: string, options: any) => {
-    setPage(1);
+    if (!currentPage) setPage(1);
     setSelectedFilter({ ...selectedFilter, [filterName]: options });
   };
 
@@ -205,8 +205,12 @@ export const TableData = ({
   const paginatedData = paginateFilteredData();
 
   useEffect(() => {
-    setPage(1);
+    if (!currentPage) setPage(1);
   }, [data]);
+
+  useEffect(() => {
+    if (currentPage && currentPage !== page) setPage(currentPage);
+  }, [currentPage]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 {
   "name": "@payla-io/mantine-ui-accelerate",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Collection of mantine ui components to help you accelerate your development",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsup"
+    "build": "tsup",
+    "deploy": "npm run build && npm publish --access public"
   },
   "author": "payla-io",
   "license": "MIT",
