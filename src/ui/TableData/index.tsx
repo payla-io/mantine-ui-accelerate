@@ -310,9 +310,9 @@ export const TableData = ({
                     ? "var(--table-selected-row-color)"
                     : undefined,
               }}
-              onClick={() => {
+              onClick={(e) => {
                 if (onRowClick) {
-                  onRowClick(item);
+                  onRowClick(item, e);
                 }
                 setSelectedIndex(i);
               }}

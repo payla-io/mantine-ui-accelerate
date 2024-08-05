@@ -47,7 +47,10 @@ export interface CTableDataProps {
   currentPage?: number;
   onPaginationChange?: (page: number) => void;
   getFilterValue?: (item: any, filterName: string) => string;
-  onRowClick?: (item: any) => void;
+  onRowClick?: (
+    item: any,
+    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>
+  ) => void;
   tableProps?: TableProps;
   labelProps?: TextProps;
   flagSelectedRow?: boolean;
