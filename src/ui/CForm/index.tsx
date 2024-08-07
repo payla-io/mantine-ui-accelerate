@@ -1,6 +1,6 @@
 import { UseFormReturnType, useForm, isEmail, isNotEmpty } from "@mantine/form";
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Button, Flex, Grid, Stack } from "@mantine/core";
+import { Box, Button, Flex, Grid, Stack, StackProps } from "@mantine/core";
 import { ICFormField } from "./types";
 import { CFieldInput } from "./CFieldInput";
 import { CFormFooter } from "./CFormFooter";
@@ -48,6 +48,7 @@ export interface CFormProps {
     [key: string]: ICFormField["initialValue"];
   }) => void;
   onCurrentIndexChange?: (currentIndex: number) => void;
+  inputFieldContainerProps?: StackProps;
 }
 
 export function CForm(props: Readonly<CFormProps>) {
@@ -197,7 +198,11 @@ export function CForm(props: Readonly<CFormProps>) {
                   fieldInputProps.inputProps?.label
                 }`}
               >
-                <CFieldInput formInstance={fmk} {...fieldInputProps} />
+                <CFieldInput
+                  formInstance={fmk}
+                  {...fieldInputProps}
+                  {...props.inputFieldContainerProps}
+                />
               </Grid.Col>
             );
           })}

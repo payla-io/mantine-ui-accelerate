@@ -6,6 +6,7 @@ import {
   Box,
   NumberInput,
   TextInput,
+  StackProps,
 } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
 import { CRangeSlider } from "./CRangeSlider";
@@ -35,6 +36,7 @@ export interface CFieldInputProps {
     Record<string, unknown>,
     (values: Record<string, unknown>) => Record<string, unknown>
   >;
+  containerProps?: StackProps;
 }
 
 const componentMap: Record<string, any> = {
@@ -58,7 +60,7 @@ const componentMap: Record<string, any> = {
 export function CFieldInput(props: Readonly<CFieldInputProps>) {
   const FieldComponent = componentMap[props.inputType];
   return (
-    <Stack align={props.align}>
+    <Stack align={props.align} {...props.containerProps}>
       {props.label && <Text size="md">{props.label}</Text>}
       {props.description && (
         <Text size="xs" c="dimmed">
