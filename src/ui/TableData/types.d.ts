@@ -54,7 +54,7 @@ export interface CTableDataProps {
   tableProps?: TableProps;
   labelProps?: TextProps;
   flagSelectedRow?: boolean;
-  selectedRow?: number;
+  isItemSelected?: (item: any) => boolean;
   loading?: boolean;
   noRecordText?: string;
   enablePageJump?: boolean;

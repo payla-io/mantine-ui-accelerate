@@ -32,41 +32,18 @@ const renderValue = (item: IKeyValue, fieldName?: string) => {
   );
 };
 
-export const TableData = ({
-  columns,
-  data,
-  searchTerm,
-  paginationSize,
-  getFilterValue,
-  onRowClick,
-  tableProps,
-  flagSelectedRow,
-  selectedRow,
-  labelProps,
-  loading,
-  noRecordText,
-  dataCount,
-  enablePageJump,
-  enableColumnVisibility,
-  currentPage,
-  onPaginationChange,
-  defaultOrderBy,
-}: CTableDataProps) => {
+export const TableData = (props: CTableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
-  const [page, setPage] = useState(currentPage ?? 1);
+  const [page, setPage] = useState(props.currentPage ?? 1);
   const [skeletonCount, setSkeletonCount] = useState(5);
   const [orderBy, setOrderBy] = useState<IOrderBy>(
-    defaultOrderBy || { column: columns[0], direction: "asc" }
+    props.defaultOrderBy || { column: props.columns[0], direction: "asc" }
   );
-  const unique = useUniqueOptions({ data });
-  const [selectedIndex, setSelectedIndex] = useState<number>();
+  const unique = useUniqueOptions({ data: props.data });
+  const [selectedItem, setSelectedItem] = useState<any>();
   const [selectedColumns, setSelectedColumns] = useState<CTableDataColumn[]>(
-    columns.filter((col) => !col.hidden)
+    props.columns.filter((col) => !col.hidden)
   );
-
-  useEffect(() => {
-    setSelectedIndex(selectedRow);
-  }, [selectedRow]);
 
   const getFilterProps = (filter: CDataFilterProps, fieldName: string) => {
     if (filter) {
@@ -81,7 +58,7 @@ export const TableData = ({
           rest.options = unique.getUniqueOptions(
             valueField,
             labelField,
-            getFilterValue
+            props.getFilterValue
           );
         }
       }
@@ -95,7 +72,7 @@ export const TableData = ({
   };
 
   const handleOnFilterChange = (filterName: string, options: any) => {
-    if (!currentPage) setPage(1);
+    if (!props.currentPage) setPage(1);
     setSelectedFilter({ ...selectedFilter, [filterName]: options });
   };
 
@@ -141,14 +118,14 @@ export const TableData = ({
   };
 
   const filterData = () => {
-    let result = data.filter((item: any) => {
+    let result = props.data.filter((item: any) => {
       const validities: boolean[] = [];
       Object.keys(selectedFilter).forEach((filterName) => {
         const filterOptions = selectedFilter[filterName];
         if (filterOptions?.length > 0) {
           let itemValue = item[filterName];
-          if (!itemValue && getFilterValue) {
-            itemValue = getFilterValue(item, filterName);
+          if (!itemValue && props.getFilterValue) {
+            itemValue = props.getFilterValue(item, filterName);
           }
           validities.push(
             !!filterOptions.some(
@@ -159,22 +136,23 @@ export const TableData = ({
       });
       return validities.every((v) => !!v);
     });
-    if (searchTerm) {
+    if (props.searchTerm) {
       result = result.filter((item) => {
-        return columns.some((col) => {
+        return props.columns.some((col) => {
           let fieldValue = col.fieldName ? item[col.fieldName] : "";
           if (!fieldValue && col.getValue) {
             fieldValue = col.getValue(item);
           }
-          if (!fieldValue && getFilterValue) {
-            fieldValue = getFilterValue(item, col.fieldName ?? "");
+          if (!fieldValue && props.getFilterValue) {
+            fieldValue = props.getFilterValue(item, col.fieldName ?? "");
           }
           if (!fieldValue && col.renderValue) {
             fieldValue = col.renderValue(item);
           }
           return (
             typeof fieldValue === "string" &&
-            fieldValue.toLowerCase().includes(searchTerm.toLowerCase())
+            props.searchTerm &&
+            fieldValue.toLowerCase().includes(props.searchTerm.toLowerCase())
           );
         });
       });
@@ -191,9 +169,9 @@ export const TableData = ({
   const filtered = filterData();
 
   const paginateFilteredData = () => {
-    if (paginationSize && !onPaginationChange) {
-      const start = (page - 1) * paginationSize;
-      const end = start + paginationSize;
+    if (props.paginationSize && !props.onPaginationChange) {
+      const start = (page - 1) * props.paginationSize;
+      const end = start + props.paginationSize;
       return filtered.slice(start, end);
     }
     if (filtered.length > skeletonCount) {
@@ -205,19 +183,20 @@ export const TableData = ({
   const paginatedData = paginateFilteredData();
 
   useEffect(() => {
-    if (!currentPage) setPage(1);
-  }, [data]);
+    if (!props.currentPage) setPage(1);
+  }, [props.data]);
 
   useEffect(() => {
-    if (currentPage && currentPage !== page) setPage(currentPage);
-  }, [currentPage]);
+    if (props.currentPage && props.currentPage !== page)
+      setPage(props.currentPage);
+  }, [props.currentPage]);
 
   return (
     <>
-      <Table {...tableProps}>
+      <Table {...props.tableProps}>
         <Table.Thead>
           <Table.Tr data-cy="table-headers">
-            {columns.map((column, i) => {
+            {props.columns.map((column, i) => {
               if (
                 typeof column.label === "string" &&
                 !selectedColumns.some((col) => col.label === column.label)
@@ -241,14 +220,14 @@ export const TableData = ({
                         )}
                       />
                     )}
-                    <Text fw={400} fz={16} opacity={0.4} {...labelProps}>
+                    <Text fw={400} fz={16} opacity={0.4} {...props.labelProps}>
                       {column.label}
                     </Text>
                   </Flex>
                 </Table.Th>
               );
             })}
-            {enableColumnVisibility && (
+            {props.enableColumnVisibility && (
               <Table.Th>
                 <CPopoverOptions
                   trigger={
@@ -259,7 +238,7 @@ export const TableData = ({
                       <IconDots />
                     </ActionIcon>
                   }
-                  options={columns}
+                  options={props.columns}
                   selectedOptions={selectedColumns}
                   getValue={(option) => option.label}
                   getLabel={(option) => option.label}
@@ -304,20 +283,22 @@ export const TableData = ({
               key={i}
               style={{
                 borderStyle: "hidden",
-                cursor: onRowClick ? "pointer" : "auto",
+                cursor: props.onRowClick ? "pointer" : "auto",
                 backgroundColor:
-                  selectedIndex === i && flagSelectedRow
+                  props.flagSelectedRow &&
+                  props.isItemSelected &&
+                  props.isItemSelected(selectedItem)
                     ? "var(--table-selected-row-color)"
                     : undefined,
               }}
               onClick={(e) => {
-                if (onRowClick) {
-                  onRowClick(item, e);
+                if (props.onRowClick) {
+                  props.onRowClick(item, e);
                 }
-                setSelectedIndex(i);
+                setSelectedItem(item);
               }}
             >
-              {columns.map((column, i) => {
+              {props.columns.map((column, i) => {
                 if (
                   typeof column.label === "string" &&
                   !selectedColumns.some((col) => col.label === column.label)
@@ -344,29 +325,31 @@ export const TableData = ({
           ))}
         </Table.Tbody>
       </Table>
-      {paginatedData.length === 0 && !loading && noRecordText && (
+      {paginatedData.length === 0 && !props.loading && props.noRecordText && (
         <Text my="sm" c="dimmed">
-          {noRecordText}
+          {props.noRecordText}
         </Text>
       )}
-      {loading && <SkeletonRow count={skeletonCount} />}
-      {paginationSize && (
+      {props.loading && <SkeletonRow count={skeletonCount} />}
+      {props.paginationSize && (
         <Flex justify={"center"} style={{ width: "100%" }} mt="md">
-          {Math.ceil((dataCount ?? filtered.length) / paginationSize) > 1 && (
+          {Math.ceil(
+            (props.dataCount ?? filtered.length) / props.paginationSize
+          ) > 1 && (
             <Flex gap="xl" align={"center"} wrap={"wrap"}>
               <Pagination
                 total={Math.ceil(
-                  (dataCount ?? filtered.length) / paginationSize
+                  (props.dataCount ?? filtered.length) / props.paginationSize
                 )}
                 value={page}
                 onChange={(page: number) => {
                   setPage(page);
-                  if (onPaginationChange) {
-                    onPaginationChange(page);
+                  if (props.onPaginationChange) {
+                    props.onPaginationChange(page);
                   }
                 }}
               />
-              {enablePageJump && (
+              {props.enablePageJump && (
                 <Box>
                   <Flex gap="xs" align="center">
                     <Text fz={14}>Jump to page</Text>
@@ -378,14 +361,15 @@ export const TableData = ({
                         if (
                           value >
                           Math.ceil(
-                            (dataCount ?? filtered.length) / paginationSize
+                            (props.dataCount ?? filtered.length) /
+                              (props.paginationSize || 1)
                           )
                         ) {
                           return;
                         }
                         setPage(value);
-                        if (onPaginationChange) {
-                          onPaginationChange(value);
+                        if (props.onPaginationChange) {
+                          props.onPaginationChange(value);
                         }
                       }}
                     />
