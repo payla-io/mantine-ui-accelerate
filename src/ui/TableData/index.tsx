@@ -287,8 +287,8 @@ export const TableData = (props: CTableDataProps) => {
                 backgroundColor:
                   props.flagSelectedRow &&
                   props.isItemSelected &&
-                  props.isItemSelected(selectedItem)
-                    ? "var(--table-selected-row-color)"
+                  props.isItemSelected(item, selectedItem)
+                    ? props.selectedRowColor ?? "var(--mantine-primary-color-2)"
                     : undefined,
               }}
               onClick={(e) => {
@@ -352,7 +352,9 @@ export const TableData = (props: CTableDataProps) => {
               {props.enablePageJump && (
                 <Box>
                   <Flex gap="xs" align="center">
-                    <Text fz={14}>Jump to page</Text>
+                    <Text fz={14}>
+                      {props.jumpToPageLabel ?? "Jump to page"}
+                    </Text>
                     <TextInput
                       w={50}
                       value={page}

@@ -54,10 +54,12 @@ export interface CTableDataProps {
   tableProps?: TableProps;
   labelProps?: TextProps;
   flagSelectedRow?: boolean;
-  isItemSelected?: (item: any) => boolean;
+  selectedRowColor?: string;
+  isItemSelected?: (item: any, selectedItem: any) => boolean;
   loading?: boolean;
   noRecordText?: string;
   enablePageJump?: boolean;
   enableColumnVisibility?: boolean;
   defaultOrderBy?: IOrderBy;
+  jumpToPageLabel?: string;
 }

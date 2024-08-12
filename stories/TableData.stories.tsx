@@ -101,12 +101,15 @@ export const EnableVisibility: Story = {
         sorting: "number",
       },
       {
-        label: <Input placeholder="Search"/>,
+        label: <Input placeholder="Search" />,
         renderValue: (item) => {
           return <Button>Click</Button>;
         },
       },
     ],
     enableColumnVisibility: true,
+    flagSelectedRow: true,
+    onRowClick: (item) => {},
+    isItemSelected: (item, selectedItem) => item?.name === selectedItem?.name,
   },
 };
