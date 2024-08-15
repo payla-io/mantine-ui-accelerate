@@ -1,9 +1,10 @@
 import { ActionIcon, CopyButton, Tooltip } from "@mantine/core";
-import { IconCopy } from "@tabler/icons-react";
+import { IconCheck, IconCopy } from "@tabler/icons-react";
 
 export interface CCopyButtonProps {
   value: string;
-  color?: string;
+  copiedColor?: string;
+  copyColor?: string;
   copiedText: string;
   copyText: string;
 }
@@ -23,12 +24,14 @@ export function CCopyButton(props: Readonly<CCopyButtonProps>) {
           <ActionIcon
             variant="subtle"
             color={
-              copied ? "var(--mantine-primary-color-3)" : props.color ?? "gray"
+              copied
+                ? props.copiedColor ?? "var(--mantine-primary-color-3)"
+                : props.copyColor ?? "gray"
             }
             onClick={copy}
             data-cy="copy-button"
           >
-            <IconCopy />
+            {copied ? <IconCheck /> : <IconCopy />}
           </ActionIcon>
         </Tooltip>
       )}
