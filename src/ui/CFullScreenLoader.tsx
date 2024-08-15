@@ -1,6 +1,6 @@
 import { Box, Loader } from "@mantine/core";
 
-interface CFullScreenLoaderProps {
+export interface CFullScreenLoaderProps {
   loading?: boolean;
 }
 export function CFullScreenLoader(props: Readonly<CFullScreenLoaderProps>) {

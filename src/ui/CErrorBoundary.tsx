@@ -4,7 +4,7 @@ interface State {
   hasError: boolean;
 }
 
-interface CErrorBoundaryProps {
+export interface CErrorBoundaryProps {
   fallback: React.ReactNode;
   children: React.ReactNode;
   degug?: boolean;

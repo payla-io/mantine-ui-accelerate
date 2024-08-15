@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { CForm, CFormProps } from "./CForm";
 
-interface CConfirmModaProps {
+export interface CConfirmModaProps {
   message: string;
   confirmButtonLabel: string;
   confirmButtonProps?: ButtonProps;
@@ -23,7 +23,7 @@ interface CConfirmModaProps {
   onConfirm: (data?: any) => void;
   onCancel?: () => void;
 }
-const CConfirmModal = (props: CConfirmModaProps) => {
+export const CConfirmModal = (props: CConfirmModaProps) => {
   const [open, setOpen] = useState(props.opened ?? false);
   const [data, setData] = useState({});
   const closeModal = () => {
@@ -92,5 +92,3 @@ const CConfirmModal = (props: CConfirmModaProps) => {
     </>
   );
 };
-
-export default CConfirmModal;

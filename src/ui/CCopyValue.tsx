@@ -1,7 +1,7 @@
 import { Group, GroupProps } from "@mantine/core";
 import { CCopyButton, CCopyButtonProps } from "./CCopyButton";
 
-interface CCopyValueProps {
+export interface CCopyValueProps {
   containerProps?: GroupProps;
   copyProps: CCopyButtonProps;
   children: React.ReactNode;

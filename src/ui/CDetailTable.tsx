@@ -1,20 +1,20 @@
 import { Table, TableProps } from "@mantine/core";
 import React from "react";
 
-interface CDetailTableRow {
+export interface CDetailTableRow {
   fieldName?: string;
   label: string;
   renderValue?: (data: never) => React.ReactNode | string | number | undefined;
 }
 
-interface CDetailTableProps {
+export interface CDetailTableProps {
   tableProps?: TableProps;
   rows: CDetailTableRow[];
   data: never;
   renderValue?: (data: never) => React.ReactNode | string | number | undefined;
 }
 
-const CDetailTable = (props: CDetailTableProps) => {
+export const CDetailTable = (props: CDetailTableProps) => {
   const getContent = (item: CDetailTableRow) => {
     if (item.fieldName) return props.data[item.fieldName];
     if (item.renderValue) return item.renderValue(props.data);
@@ -37,4 +37,3 @@ const CDetailTable = (props: CDetailTableProps) => {
     </Table>
   );
 };
-export default CDetailTable;
