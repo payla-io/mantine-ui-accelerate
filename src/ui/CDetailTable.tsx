@@ -3,8 +3,9 @@ import React from "react";
 
 export interface CDetailTableRow {
   fieldName?: string;
-  label: string;
+  label?: string;
   renderValue?: (data: never) => React.ReactNode | string | number | undefined;
+  renderLabel?: (data?: never) => React.ReactNode | string | number | undefined;
 }
 
 export interface CDetailTableProps {
@@ -28,7 +29,9 @@ export const CDetailTable = (props: CDetailTableProps) => {
         {props.rows.map((item, i) => {
           return (
             <Table.Tr key={i}>
-              <Table.Td>{item.label}</Table.Td>
+              <Table.Th>
+                {item.renderLabel ? item.renderLabel(props.data) : item.label}
+              </Table.Th>
               <Table.Td>{getContent(item)}</Table.Td>
             </Table.Tr>
           );
