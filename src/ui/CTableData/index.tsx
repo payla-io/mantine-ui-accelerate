@@ -7,24 +7,23 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { DataSort } from "./DataSort";
-import { DataFilter } from "./DataFilter";
+import { CDataSort, IOrderBy } from "../CDataSort";
+import { CDataFilter } from "../CDataFilter";
 import { useEffect, useState } from "react";
 import {
-  CDataFilterProps,
-  IKeyValue,
-  IOrderBy,
+  CTableDataFilterProps,
+  CIKeyValue,
   CTableDataColumn,
   CTableDataProps,
 } from "./types";
-import { SkeletonRow } from "./SkeletonRow";
+import { CSkeletonRow } from "../CSkeletonRow";
 import { IconDots, IconEye } from "@tabler/icons-react";
 import { CPopoverOptions } from "../CPopoverOptions";
 import { CItem } from "../CItem";
 import { useUniqueOptions } from "../../hooks/useUniqueOptions";
 import { IOption } from "../CForm/types";
 
-const renderValue = (item: IKeyValue, fieldName?: string) => {
+const renderValue = (item: CIKeyValue, fieldName?: string) => {
   return (
     <Text fw={400} fz={14}>
       {fieldName ? item[fieldName] : ""}
@@ -32,7 +31,7 @@ const renderValue = (item: IKeyValue, fieldName?: string) => {
   );
 };
 
-export const TableData = (props: CTableDataProps) => {
+export const CTableData = (props: CTableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
   const [page, setPage] = useState(props.currentPage ?? 1);
   const [skeletonCount, setSkeletonCount] = useState(5);
@@ -45,7 +44,7 @@ export const TableData = (props: CTableDataProps) => {
     props.columns.filter((col) => !col.hidden)
   );
 
-  const getFilterProps = (filter: CDataFilterProps, fieldName: string) => {
+  const getFilterProps = (filter: CTableDataFilterProps, fieldName: string) => {
     if (filter) {
       const { valueField, labelField, ...rest } = filter;
       if (!rest.options) {
@@ -206,14 +205,14 @@ export const TableData = (props: CTableDataProps) => {
                 <Table.Th key={i}>
                   <Flex align={"center"} gap={5}>
                     {column.sorting && (
-                      <DataSort
+                      <CDataSort
                         orderBy={orderBy}
                         column={column}
                         onChange={handleOnSortChange}
                       />
                     )}
                     {column.filter && (
-                      <DataFilter
+                      <CDataFilter
                         {...getFilterProps(
                           column.filter,
                           column.fieldName as string
@@ -330,7 +329,7 @@ export const TableData = (props: CTableDataProps) => {
           {props.noRecordText}
         </Text>
       )}
-      {props.loading && <SkeletonRow count={skeletonCount} />}
+      {props.loading && <CSkeletonRow count={skeletonCount} />}
       {props.paginationSize && (
         <Flex justify={"center"} style={{ width: "100%" }} mt="md">
           {Math.ceil(

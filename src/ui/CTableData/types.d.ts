@@ -2,17 +2,6 @@ import React from "react";
 import { TableProps, TextProps } from "@mantine/core";
 import { IOption } from "../CForm/types";
 
-export interface CDataFilterProps {
-  valueField?: string;
-  labelField?: string;
-  getLabel?: (option: IOption) => string;
-  getValue?: (option: IOption) => string;
-  options?: IOption[];
-  selectedOptions?: IOption[];
-  onChange?: (options: IOption[]) => void;
-  renderLabel?: (option: IOption) => React.ReactNode;
-}
-
 export interface CTableDataColumn {
   fieldName?: string;
   label: string | React.ReactNode;
@@ -23,18 +12,18 @@ export interface CTableDataColumn {
   hidden?: boolean;
 }
 
-export interface IOrderBy {
-  column: CTableDataColumn;
-  direction: string;
+export interface CTableDataFilterProps {
+  valueField?: string;
+  labelField?: string;
+  getLabel?: (option: IOption) => string;
+  getValue?: (option: IOption) => string;
+  options?: IOption[];
+  selectedOptions?: IOption[];
+  onChange?: (options: IOption[]) => void;
+  renderLabel?: (option: IOption) => React.ReactNode;
 }
 
-export interface CDataSortingProps {
-  onChange?: (column: CTableDataColumn, direction: string) => void;
-  column: CTableDataColumn;
-  orderBy: IOrderBy | undefined;
-}
-
-export interface IKeyValue {
+export interface CIKeyValue {
   [key: string]: string;
 }
 

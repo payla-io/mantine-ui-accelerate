@@ -1,9 +1,20 @@
 import { Flex, useMantineTheme } from "@mantine/core";
 import { IconArrowNarrowDown, IconArrowNarrowUp } from "@tabler/icons-react";
-import { CDataSortingProps } from "./types";
 import { useState } from "react";
+import { CTableDataColumn } from "./CTableData/types";
 
-export function DataSort({
+export interface IOrderBy {
+  column: CTableDataColumn;
+  direction: string;
+}
+
+export interface CDataSortingProps {
+  onChange?: (column: CTableDataColumn, direction: string) => void;
+  column: CTableDataColumn;
+  orderBy: IOrderBy | undefined;
+}
+
+export function CDataSort({
   column,
   orderBy,
   onChange,

@@ -3,15 +3,15 @@ import { CTableDataProps } from "./types";
 import InfiniteScroll, {
   Props as InfiniteScrollProps,
 } from "react-infinite-scroll-component";
-import { TableData } from ".";
+import { CTableData } from ".";
 
-export interface InfiniteScrollTableProps extends CTableDataProps {
+export interface CInfiniteScrollTableProps extends CTableDataProps {
   loadMore?: () => void;
   hasNextPage?: boolean;
   infiniteScrollProps?: InfiniteScrollProps;
 }
 
-export const InfiniteScrollTable = (props: InfiniteScrollTableProps) => {
+export const CInfiniteScrollTable = (props: CInfiniteScrollTableProps) => {
   return (
     <InfiniteScroll
       dataLength={props.data.length}
@@ -22,7 +22,7 @@ export const InfiniteScrollTable = (props: InfiniteScrollTableProps) => {
       loader={<Skeleton height={20} />}
       {...props.infiniteScrollProps}
     >
-      <TableData {...props} />
+      <CTableData {...props} />
     </InfiniteScroll>
   );
 };

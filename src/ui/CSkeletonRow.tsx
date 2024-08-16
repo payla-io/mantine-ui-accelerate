@@ -1,12 +1,12 @@
 import { Skeleton, SkeletonProps, Stack, StackProps } from "@mantine/core";
 
-interface SkeletonRowProps {
+export interface SkeletonRowProps {
   count?: number;
   skeletonProps?: SkeletonProps;
   containerProps?: StackProps;
 }
 
-export function SkeletonRow(props: Readonly<SkeletonRowProps>) {
+export function CSkeletonRow(props: Readonly<SkeletonRowProps>) {
   return (
     <Stack gap="sm" my="sm" {...props.containerProps}>
       {[...Array(props.count ?? 1)].map((_t, i) => (

@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TableData } from "../src/ui/TableData";
+import { CTableData } from "../src/ui/CTableData";
 import React from "react";
 import { Button, Input } from "@mantine/core";
 
-const meta: Meta<typeof TableData> = {
-  component: TableData,
+const meta: Meta<typeof CTableData> = {
+  component: CTableData,
 };
 
 export default meta;
-type Story = StoryObj<typeof TableData>;
+type Story = StoryObj<typeof CTableData>;
 
 export const Basic: Story = {
   args: {

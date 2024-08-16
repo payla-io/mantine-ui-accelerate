@@ -1,22 +1,23 @@
 import { Checkbox, Popover, Stack, Input, Box } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
-import { CDataFilterProps } from "./types";
 import { useEffect, useState } from "react";
-import { IOption } from "../CForm/types";
+import { IOption } from "./CForm/types";
 
-export function DataFilter({
-  selectedOptions,
-  options,
-  renderLabel,
-  onChange,
-}: Readonly<CDataFilterProps>) {
+export interface CDataFilterProps {
+  options?: IOption[];
+  selectedOptions?: IOption[];
+  onChange?: (options: IOption[]) => void;
+  renderLabel?: (option: IOption) => React.ReactNode;
+}
+
+export function CDataFilter(props: Readonly<CDataFilterProps>) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selected, setSelected] = useState(selectedOptions ?? []);
-  const showSearch = (options?.length ?? 0) > 5;
+  const [selected, setSelected] = useState(props.selectedOptions ?? []);
+  const showSearch = (props.options?.length ?? 0) > 5;
   const filterOptions = () => {
-    if (!searchTerm) return options ?? [];
+    if (!searchTerm) return props.options ?? [];
     return (
-      options?.filter((option) =>
+      props.options?.filter((option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       ) ?? []
     );
@@ -31,7 +32,7 @@ export function DataFilter({
   };
 
   useEffect(() => {
-    if (onChange) onChange(selected);
+    if (props.onChange) props.onChange(selected);
   }, [selected]);
 
   return (
@@ -76,7 +77,9 @@ export function DataFilter({
                 <Checkbox
                   readOnly
                   key={option.value ?? "empty"}
-                  label={renderLabel ? renderLabel(option) : option.label}
+                  label={
+                    props.renderLabel ? props.renderLabel(option) : option.label
+                  }
                   checked={selected.some((o) => option.value === o.value)}
                   onClick={() => {
                     handleOnChange(option);
