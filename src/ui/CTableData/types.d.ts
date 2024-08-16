@@ -2,16 +2,6 @@ import React from "react";
 import { TableProps, TextProps } from "@mantine/core";
 import { IOption } from "../CForm/types";
 
-export interface CTableDataColumn {
-  fieldName?: string;
-  label: string | React.ReactNode;
-  renderValue?: (item: any) => React.ReactNode | string | number;
-  getValue?: (item: any) => string;
-  filter?: CDataFilterProps;
-  sorting?: string;
-  hidden?: boolean;
-}
-
 export interface CTableDataFilterProps {
   valueField?: string;
   labelField?: string;
@@ -21,6 +11,16 @@ export interface CTableDataFilterProps {
   selectedOptions?: IOption[];
   onChange?: (options: IOption[]) => void;
   renderLabel?: (option: IOption) => React.ReactNode;
+}
+
+export interface CTableDataColumn {
+  fieldName?: string;
+  label: string | React.ReactNode;
+  renderValue?: (item: any) => React.ReactNode | string | number;
+  getValue?: (item: any) => string;
+  filter?: CTableDataFilterProps;
+  sorting?: string;
+  hidden?: boolean;
 }
 
 export interface CIKeyValue {
@@ -51,4 +51,7 @@ export interface CTableDataProps {
   enableColumnVisibility?: boolean;
   defaultOrderBy?: IOrderBy;
   jumpToPageLabel?: string;
+  enableRowPointer?: boolean;
+  singleRowToggle?: boolean;
+  getCollapsibleContent?: (item: any) => React.ReactNode;
 }

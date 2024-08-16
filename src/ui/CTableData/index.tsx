@@ -3,13 +3,14 @@ import {
   Box,
   Flex,
   Pagination,
+  Stack,
   Table,
   Text,
   TextInput,
 } from "@mantine/core";
 import { CDataSort, IOrderBy } from "../CDataSort";
 import { CDataFilter } from "../CDataFilter";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CTableDataFilterProps,
   CIKeyValue,
@@ -22,6 +23,7 @@ import { CPopoverOptions } from "../CPopoverOptions";
 import { CItem } from "../CItem";
 import { useUniqueOptions } from "../../hooks/useUniqueOptions";
 import { IOption } from "../CForm/types";
+import CChevronToggle from "../CChevronToggle";
 
 const renderValue = (item: CIKeyValue, fieldName?: string) => {
   return (
@@ -33,6 +35,7 @@ const renderValue = (item: CIKeyValue, fieldName?: string) => {
 
 export const CTableData = (props: CTableDataProps) => {
   const [selectedFilter, setSelectedFilter] = useState<any>({});
+  const [toggledRow, setToggledRow] = useState<any>({});
   const [page, setPage] = useState(props.currentPage ?? 1);
   const [skeletonCount, setSkeletonCount] = useState(5);
   const [orderBy, setOrderBy] = useState<IOrderBy>(
@@ -277,50 +280,84 @@ export const CTableData = (props: CTableDataProps) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody data-cy="table-content">
-          {paginatedData.map((item, i) => (
-            <Table.Tr
-              key={i}
-              style={{
-                borderStyle: "hidden",
-                cursor: props.onRowClick ? "pointer" : "auto",
-                backgroundColor:
-                  props.flagSelectedRow &&
-                  props.isItemSelected &&
-                  props.isItemSelected(item, selectedItem)
-                    ? props.selectedRowColor ?? "var(--mantine-primary-color-2)"
-                    : undefined,
-              }}
-              onClick={(e) => {
-                if (props.onRowClick) {
-                  props.onRowClick(item, e);
-                }
-                setSelectedItem(item);
-              }}
-            >
-              {props.columns.map((column, i) => {
-                if (
-                  typeof column.label === "string" &&
-                  !selectedColumns.some((col) => col.label === column.label)
-                )
-                  return null;
-                return (
-                  <Table.Td
-                    key={i}
-                    style={{
-                      paddingLeft:
-                        column.filter || column.sorting
-                          ? getContentPaddingLeft(column)
-                          : 10,
-                      borderBottom: 0,
-                    }}
-                  >
-                    {column.renderValue
-                      ? column.renderValue(item)
-                      : renderValue(item, column.fieldName)}
+          {paginatedData.map((item, rowIndex) => (
+            <React.Fragment key={rowIndex}>
+              <Table.Tr
+                style={{
+                  borderStyle: "hidden",
+                  cursor:
+                    props.onRowClick ||
+                    props.getCollapsibleContent ||
+                    props.enableRowPointer
+                      ? "pointer"
+                      : "auto",
+                  backgroundColor:
+                    props.flagSelectedRow &&
+                    props.isItemSelected &&
+                    props.isItemSelected(item, selectedItem)
+                      ? props.selectedRowColor ??
+                        "var(--mantine-primary-color-2)"
+                      : undefined,
+                }}
+                onClick={(e) => {
+                  if (props.onRowClick) {
+                    props.onRowClick(item, e);
+                  }
+                  setSelectedItem(item);
+                  if (props.singleRowToggle) {
+                    setToggledRow({
+                      [rowIndex]: !toggledRow[rowIndex],
+                    });
+                  } else {
+                    setToggledRow({
+                      ...toggledRow,
+                      [rowIndex]: !toggledRow[rowIndex],
+                    });
+                  }
+                }}
+              >
+                {props.columns.map((column, i) => {
+                  if (
+                    typeof column.label === "string" &&
+                    !selectedColumns.some((col) => col.label === column.label)
+                  )
+                    return null;
+                  return (
+                    <Table.Td
+                      key={i}
+                      style={{
+                        paddingLeft:
+                          column.filter || column.sorting
+                            ? getContentPaddingLeft(column)
+                            : 10,
+                        borderBottom: 0,
+                      }}
+                      pl={
+                        props.getCollapsibleContent && i === 0 ? 0 : undefined
+                      }
+                    >
+                      <Flex align={"center"} gap={"sm"}>
+                        {props.getCollapsibleContent && i === 0 && (
+                          <CChevronToggle active={!!toggledRow[rowIndex]} />
+                        )}
+                        {column.renderValue
+                          ? column.renderValue(item)
+                          : renderValue(item, column.fieldName)}
+                      </Flex>
+                    </Table.Td>
+                  );
+                })}
+              </Table.Tr>
+              {props.getCollapsibleContent && !!toggledRow[rowIndex] && (
+                <Table.Tr>
+                  <Table.Td colSpan={props.columns.length} p="0">
+                    <Box bg="gray.0" p="sm">
+                      {props.getCollapsibleContent(item)}
+                    </Box>
                   </Table.Td>
-                );
-              })}
-            </Table.Tr>
+                </Table.Tr>
+              )}
+            </React.Fragment>
           ))}
         </Table.Tbody>
       </Table>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { CTableData } from "../src/ui/CTableData";
 import React from "react";
-import { Button, Input } from "@mantine/core";
+import { Button, Card, Input } from "@mantine/core";
 
 const meta: Meta<typeof CTableData> = {
   component: CTableData,
@@ -109,7 +109,14 @@ export const EnableVisibility: Story = {
     ],
     enableColumnVisibility: true,
     flagSelectedRow: true,
+    singleRowToggle: true,
+    tableProps: {
+      striped: true,
+    },
     onRowClick: (item) => {},
     isItemSelected: (item, selectedItem) => item?.name === selectedItem?.name,
+    getCollapsibleContent: (item) => {
+      return <Card shadow="xs">{item.name}</Card>;
+    },
   },
 };
