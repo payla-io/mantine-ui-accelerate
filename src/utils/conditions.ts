@@ -1,5 +1,5 @@
 import { IOption } from "../ui/CForm/types";
-import { IKeyValue } from "../ui/CTableData/types";
+import { CIKeyValue } from "../ui/CTableData/types";
 
 export function isValidUrl(value: string) {
   const pattern = new RegExp(
@@ -147,7 +147,7 @@ export const conditionValidator: { [key: string]: any } = {
   },
 };
 
-const comparisonMap: IKeyValue = {
+const comparisonMap: CIKeyValue = {
   is_equal_to: "should be equal to",
   is_not_empty: "should not be empty",
   is_not_equal_to: "should be not equal to",

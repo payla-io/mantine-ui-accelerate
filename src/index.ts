@@ -19,7 +19,7 @@ export * from "./ui/CDataFilter";
 export * from "./ui/CDataSort";
 export * from "./ui/CTableData/CInfiniteScrollTable";
 export * from "./ui/CSkeletonRow";
-export * from "./ui/CTableData/types";
+export * from "./ui/CTableData/types.d";
 export * from "./ui/CCopyButton";
 export * from "./ui/CDetailAccordionCard";
 export * from "./ui/CDrawer";
