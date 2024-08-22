@@ -128,6 +128,9 @@ export const useFilters = ({
         let prevDate: Date | null = null;
         filters[key] = value
           .map((v) => {
+            if (!isNaN(v)) {
+              return v;
+            }
             if (v === null && prevDate) {
               return formatDate
                 ? formatDate(prevDate)
