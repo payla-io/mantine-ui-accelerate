@@ -55,6 +55,9 @@ export const useFilters = ({
             {
               label: filter.value
                 .map((v) => {
+                  if (!isNaN(v)) {
+                    return v;
+                  }
                   if (new Date(v).toString() !== "Invalid Date") {
                     return new Date(v).toDateString();
                   }
