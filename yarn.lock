@@ -1506,10 +1506,10 @@
   resolved "https://registry.npmjs.org/@juggle/resize-observer/-/resize-observer-3.4.0.tgz"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
-"@mantine/core@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/core/-/core-7.11.1.tgz"
-  integrity sha512-qEwe5ijBe3MWOg4yerJ+HXMugIBtS1Bbqbdnfrg2cuHXr+2paqu8SQMzldtzqfiLsRajOtkokOkY67jUJOacCA==
+"@mantine/core@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.12.1.tgz#acd1861551465c0e2dc0879e8d76a101e865be20"
+  integrity sha512-PXKIDaT1fpNB77dPQIcdFGM2NRnfmsJSVx3uuBccngBQWMIWI0wPyiO1Y26DK4LQrbrypeb+TS+Zxpgx6RoiCA==
   dependencies:
     "@floating-ui/react" "^0.26.9"
     clsx "^2.1.1"
@@ -1518,37 +1518,37 @@
     react-textarea-autosize "8.5.3"
     type-fest "^4.12.0"
 
-"@mantine/dates@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/dates/-/dates-7.11.1.tgz"
-  integrity sha512-Km0WGaftHPK+oqCjvg2gdzxWsDS7seZdUx6VFQE0m35zouiSaRRFCrfo/NOKGS8ctKC/VsYdFQr+EkDxG+EEjg==
+"@mantine/dates@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/dates/-/dates-7.12.1.tgz#ec82a863e24774cfdf9e68c19e098f8349f67c53"
+  integrity sha512-+Dg5ZGoYPWYRWPY7HagLeW36ayVjKQIkTpdNvgGDwh5YpaFy5cHd6LK6USKUshTsRPuzM3oUKwXIBK8hsigMyA==
   dependencies:
     clsx "^2.1.1"
 
-"@mantine/dropzone@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-7.11.1.tgz"
-  integrity sha512-Jvn+ikhT1GtQq3EMAYWK+1lk6CVDeB1Ykok7oUjTWPZDYAcQkLDNfPpFLqrbPPYSMav0u67zzaq9fUVTYVVhew==
+"@mantine/dropzone@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-7.12.1.tgz#bd1c3b365261d3e2eb265e7a7bd165ef951271d4"
+  integrity sha512-IuAdCnl6PDtkDnGp4vQlHgxr9z3R7s0685khVKpxy/3f+XfdoswUBBY3X7XyirpDXMIjMD4SLpkIzwuUXgZsag==
   dependencies:
     react-dropzone-esm "15.0.1"
 
-"@mantine/form@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/form/-/form-7.11.1.tgz"
-  integrity sha512-d14Rrx4Yid3/sDPvRHt5mYK37PWedflwbxWO0vJ98qpYFUGunw9pTm7dmPNoUoj4fHGX9b0F+TWuM4zXs2wAwg==
+"@mantine/form@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/form/-/form-7.12.1.tgz#b8647c0e5915ae170936c390bc0b81031c6b2594"
+  integrity sha512-Q+lpgG9N8srlsI0IPnD1V1c2ZaI0xmR3bBEVm+LttSos6Q5zkG49Yy011mc0cXzEKUk2h48j8PLoPHfSEzO03g==
   dependencies:
     fast-deep-equal "^3.1.3"
     klona "^2.0.6"
 
-"@mantine/hooks@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-7.11.1.tgz"
-  integrity sha512-28WS/U6QL4jaIHf1uFpny5Tglu9MoyyM4bWLmIcAQHtOD3YHpuNvs9OTWLqKAQs6VN+kydlxvjvT+w1LBWEpQg==
+"@mantine/hooks@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.12.1.tgz#a2b402b02eb2f8bb64739656dce87e00935f92f8"
+  integrity sha512-YPA3qiMHJkWID5+YzakBaLvjHtX3Fg3PdPY49iIb/CaWM9+lrJ+77TOVS7bsY7ZTBHXUfzft1/6Woqt3xSuweA==
 
-"@mantine/modals@^7.11.1":
-  version "7.11.1"
-  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.11.1.tgz"
-  integrity sha512-SDHhpt7O+Y8rTW5RaXFqIIjuD87efUqhC5kxqLyRsuivQ+tk4gMY37R5gR8o0yC6vifKBzjjYVFeeGTLocRTBg==
+"@mantine/modals@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.12.1.tgz#91d790fe0bbd933c4baf32583c7272265c3cd3de"
+  integrity sha512-olS07yDcCFLGylLGaQgBiTnKcRrUZVLKqBFBw5glcmc/wZmJf4SDMgx5mxSwBnsbJOwJ2d3aIYwO/qNTNnluSg==
 
 "@mdx-js/react@^3.0.0":
   version "3.0.1"

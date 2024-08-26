@@ -1,6 +1,6 @@
 {
   "name": "@payla-io/mantine-ui-accelerate",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Collection of mantine ui components to help you accelerate your development",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -58,12 +58,12 @@
     "vite": "^5.3.1"
   },
   "dependencies": {
-    "@mantine/core": "^7.11.1",
-    "@mantine/dates": "^7.11.1",
-    "@mantine/dropzone": "^7.11.1",
-    "@mantine/form": "^7.11.1",
-    "@mantine/hooks": "^7.11.1",
-    "@mantine/modals": "^7.11.1",
+    "@mantine/core": "^7.12.1",
+    "@mantine/dates": "^7.12.1",
+    "@mantine/dropzone": "^7.12.1",
+    "@mantine/form": "^7.12.1",
+    "@mantine/hooks": "^7.12.1",
+    "@mantine/modals": "^7.12.1",
     "@tabler/icons-react": "^3.6.0",
     "dayjs": "^1.11.12",
     "react-infinite-scroll-component": "^6.1.0",

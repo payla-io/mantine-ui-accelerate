@@ -55,9 +55,6 @@ export const useFilters = ({
             {
               label: filter.value
                 .map((v) => {
-                  if (!isNaN(v)) {
-                    return v;
-                  }
                   if (new Date(v).toString() !== "Invalid Date") {
                     return new Date(v).toDateString();
                   }
@@ -131,9 +128,6 @@ export const useFilters = ({
         let prevDate: Date | null = null;
         filters[key] = value
           .map((v) => {
-            if (!isNaN(v)) {
-              return v;
-            }
             if (v === null && prevDate) {
               return formatDate
                 ? formatDate(prevDate)
@@ -147,6 +141,9 @@ export const useFilters = ({
               return v.value;
             }
             if (new Date(v).toString() === "Invalid Date") {
+              return v;
+            }
+            if (!isNaN(v)) {
               return v;
             }
             prevDate = new Date(v);
