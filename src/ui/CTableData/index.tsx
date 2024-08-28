@@ -79,6 +79,9 @@ export const CTableData = (props: CTableDataProps) => {
 
   const handleOnSortChange = (column: CTableDataColumn, direction: string) => {
     setOrderBy({ column, direction });
+    if (props.handleSortChange) {
+      props.handleSortChange(column, direction);
+    }
   };
 
   const sortStringMethod = (a: any, b: any): number => {
@@ -211,6 +214,8 @@ export const CTableData = (props: CTableDataProps) => {
                         orderBy={orderBy}
                         column={column}
                         onChange={handleOnSortChange}
+                        ascIndicator={props.ascSortIndicator}
+                        descIndicator={props.decSortIndicator}
                       />
                     )}
                     {column.filter && (

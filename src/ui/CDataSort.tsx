@@ -12,16 +12,14 @@ export interface CDataSortingProps {
   onChange?: (column: CTableDataColumn, direction: string) => void;
   column: CTableDataColumn;
   orderBy: IOrderBy | undefined;
+  descIndicator?: React.ReactNode;
+  ascIndicator?: React.ReactNode;
 }
 
-export function CDataSort({
-  column,
-  orderBy,
-  onChange,
-}: Readonly<CDataSortingProps>) {
+export function CDataSort(props: Readonly<CDataSortingProps>) {
   const theme = useMantineTheme();
   const [direction, setDirection] = useState<"asc" | "desc">("asc");
-  if (!column.fieldName && !column.getValue) return null;
+  if (!props.column.fieldName && !props.column.getValue) return null;
 
   return (
     <Flex
@@ -29,27 +27,44 @@ export function CDataSort({
       onClick={() => {
         const newDirection = direction === "asc" ? "desc" : "asc";
         setDirection(newDirection);
-        if (onChange) onChange(column, newDirection);
+        if (props.onChange) props.onChange(props.column, newDirection);
       }}
     >
-      <IconArrowNarrowUp
-        size={"1rem"}
-        color={
-          direction === "asc" && orderBy?.column?.fieldName === column.fieldName
-            ? theme.colors.dark[5]
-            : theme.colors.dark[0]
-        }
-      />
-      <IconArrowNarrowDown
-        size={"1rem"}
-        color={
-          direction === "desc" &&
-          orderBy?.column?.fieldName === column.fieldName
-            ? theme.colors.dark[5]
-            : theme.colors.dark[0]
-        }
-        style={{ marginLeft: -8 }}
-      />
+      {props.ascIndicator ? (
+        <>
+          {direction === "asc" &&
+            props.orderBy?.column?.fieldName === props.column.fieldName &&
+            props.ascIndicator}
+        </>
+      ) : (
+        <IconArrowNarrowUp
+          size={"1rem"}
+          color={
+            direction === "asc" &&
+            props.orderBy?.column?.fieldName === props.column.fieldName
+              ? theme.colors.dark[5]
+              : theme.colors.dark[0]
+          }
+        />
+      )}
+      {props.descIndicator ? (
+        <>
+          {direction === "desc" &&
+            props.orderBy?.column?.fieldName === props.column.fieldName &&
+            props.descIndicator}
+        </>
+      ) : (
+        <IconArrowNarrowDown
+          size={"1rem"}
+          color={
+            direction === "desc" &&
+            props.orderBy?.column?.fieldName === props.column.fieldName
+              ? theme.colors.dark[5]
+              : theme.colors.dark[0]
+          }
+          style={{ marginLeft: -8 }}
+        />
+      )}
     </Flex>
   );
 }

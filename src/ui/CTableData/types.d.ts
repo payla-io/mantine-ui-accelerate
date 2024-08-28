@@ -54,4 +54,7 @@ export interface CTableDataProps {
   enableRowPointer?: boolean;
   singleRowToggle?: boolean;
   getCollapsibleContent?: (item: any) => React.ReactNode;
+  handleSortChange?: (column: CTableDataColumn, direction: string) => void;
+  decSortIndicator?: React.ReactNode;
+  ascSortIndicator?: React.ReactNode;
 }
