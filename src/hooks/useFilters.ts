@@ -55,6 +55,9 @@ export const useFilters = ({
             {
               label: filter.value
                 .map((v) => {
+                  if (!isNaN(v)) {
+                    return v;
+                  }
                   if (new Date(v).toString() !== "Invalid Date") {
                     return new Date(v).toDateString();
                   }
@@ -74,7 +77,7 @@ export const useFilters = ({
 
       return filter.value.map((item, i) => {
         let label = getFilterLabel ? getFilterLabel(filter.name, item) : item;
-        if (typeof item === "object") {
+        if (item && typeof item === "object") {
           label = item.label;
         }
         return {
