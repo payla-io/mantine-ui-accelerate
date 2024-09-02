@@ -1,65 +1,57 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { IconCalendar, IconSearch } from "@tabler/icons-react";
-import { CSearchFilterHeader } from "../src/ui/CSearchFilterHeader";
+import { IconCalendar } from "@tabler/icons-react";
+import CSearchFilterHeaderTest from "./CSearchFilterHeaderTest";
 
-const meta: Meta<typeof CSearchFilterHeader> = {
-  component: CSearchFilterHeader,
+const meta: Meta<typeof CSearchFilterHeaderTest> = {
+  component: CSearchFilterHeaderTest,
 };
 
 export default meta;
-type Story = StoryObj<typeof CSearchFilterHeader>;
+type Story = StoryObj<typeof CSearchFilterHeaderTest>;
 
 export const Basic: Story = {
   args: {
-    data: [
-      {
-        name: "search",
-        inputType: "text",
-        inputProps: {
-          label: "Search",
-          placeholder: "Search by order # or payment reference",
-          rightSection: (
-            <IconSearch color="var(--mantine-primary-color-filled)" />
-          ),
+    formProps: {
+      data: [
+        {
+          name: "amount",
+          inputType: "range",
+          initialValue: [0, 0],
+          inputProps: {
+            label: "Amount",
+            minRange: 0,
+            min: 0,
+            max: 10000,
+            step: 100,
+          },
         },
-      },
-      {
-        name: "created",
-        inputType: "date",
-        inputProps: {
-          placeholder: "Order date",
-          label: "Order date",
-          rightSection: (
-            <IconCalendar color="var(--mantine-primary-color-filled)" />
-          ),
+        {
+          name: "booking_date",
+          inputType: "date",
+          inputProps: {
+            placeholder: "Booking date",
+            label: "Booking date",
+            type: "range",
+            rightSection: (
+              <IconCalendar color="var(--mantine-primary-color-filled)" />
+            ),
+          },
         },
-      },
-      {
-        name: "merchants",
-        inputType: "multi_select",
-        inputProps: {
-          placeholder: "Merchants",
-          label: "Merchants",
-          data: [
-            { value: "1", label: "Merchant 1" },
-            { value: "2", label: "Merchant 2" },
-            { value: "3", label: "Merchant 3" },
-          ],
+        {
+          name: "created",
+          inputType: "date",
+          inputProps: {
+            placeholder: "created",
+            label: "created",
+            type: "range",
+            rightSection: (
+              <IconCalendar color="var(--mantine-primary-color-filled)" />
+            ),
+          },
         },
-      },
-      {
-        name: "amount",
-        inputType: "range",
-        initialValue: [0, 0],
-        inputProps: {
-          label: "Amount",
-          minRange: 0,
-          min: 0,
-          max: 10000,
-          step: 100,
-        },
-      },
-    ],
+      ],
+    },
+    updateFilterOnlyOnSubmit: true,
   },
 };

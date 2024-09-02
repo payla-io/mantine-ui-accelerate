@@ -30,6 +30,7 @@ export interface CSearchFilterHeaderProps {
   getStateFilters: () => Record<string, IFilterItem>;
   setStateFilters: (filters: Record<string, IFilterItem>) => void;
   formatDate?: (date: Date) => string;
+  updateFilterOnlyOnSubmit?: boolean;
 }
 
 export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
@@ -59,6 +60,15 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
         setSelectedFilter(field.name, filter);
       }
     });
+  };
+
+  const handleSubmit = (values: {
+    [key: string]: ICFormField["initialValue"];
+  }) => {
+    if (props.updateFilterOnlyOnSubmit) {
+      handleValueChange(values);
+    }
+    props.onFormSubmit?.(values);
   };
 
   const parseValue = (value: unknown) => {
@@ -177,9 +187,11 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
             getHeader={getHeader}
           >
             <CForm
-              onSubmit={props.onFormSubmit}
+              onSubmit={handleSubmit}
               setFormInstance={setFmk}
-              onValueChange={handleValueChange}
+              onValueChange={
+                props.updateFilterOnlyOnSubmit ? undefined : handleValueChange
+              }
               {...props.formProps}
               data={getFormInitialValues()}
             />
