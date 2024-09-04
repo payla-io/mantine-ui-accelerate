@@ -54,6 +54,7 @@ export interface CFormProps {
 export function CForm(props: Readonly<CFormProps>) {
   const [currentIndex, setCurrentIndex] = useState(props.currentIndex ?? 0);
   const formRef = useRef<any>(null);
+  const onValueChangeTimoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const getDefaultValues = (field: ICFormField) => {
     if (["select", "multi_select"].includes(field.inputType)) {
@@ -156,7 +157,12 @@ export function CForm(props: Readonly<CFormProps>) {
   }, []);
 
   useEffect(() => {
-    if (props.onValueChange) props.onValueChange(fmk.values);
+    if (onValueChangeTimoutRef.current) {
+      clearTimeout(onValueChangeTimoutRef.current);
+    }
+    onValueChangeTimoutRef.current = setTimeout(() => {
+      if (props.onValueChange) props.onValueChange(fmk.values);
+    }, 500);
   }, [fmk.values]);
 
   useEffect(() => {
