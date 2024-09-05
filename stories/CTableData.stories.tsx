@@ -110,6 +110,7 @@ export const EnableVisibility: Story = {
     enableColumnVisibility: true,
     flagSelectedRow: true,
     singleRowToggle: true,
+    paginationSize: 2,
     tableProps: {
       striped: true,
     },

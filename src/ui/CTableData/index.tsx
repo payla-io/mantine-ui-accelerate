@@ -187,7 +187,7 @@ export const CTableData = (props: CTableDataProps) => {
   const paginatedData = paginateFilteredData();
 
   useEffect(() => {
-    if (!props.currentPage) setPage(1);
+    if (!props.currentPage || !props.searchTerm) setPage(1);
   }, [props.data, props.searchTerm]);
 
   useEffect(() => {
