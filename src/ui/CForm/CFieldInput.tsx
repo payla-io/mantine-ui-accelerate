@@ -25,6 +25,7 @@ export interface CFieldInputProps {
   name: string;
   align?: string;
   helpText?: string;
+  infoText?: React.ReactNode;
   label?: string;
   description?: string;
   inputType: string;
@@ -80,6 +81,7 @@ export function CFieldInput(props: Readonly<CFieldInputProps>) {
             {props.helpText}
           </Text>
         )}
+        {props.infoText}
       </Box>
     </Stack>
   );

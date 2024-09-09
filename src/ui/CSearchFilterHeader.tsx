@@ -198,34 +198,38 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
           </CDrawer>
         )}
       </Flex>
-      <Flex
-        justify="flex-start"
-        align={"center"}
-        gap="xs"
-        wrap="wrap"
-        pr={{ base: "80px", sm: "90px" }}
-      >
-        {Object.keys(selected).map((filter) => {
-          const selectedFilter = selected[filter];
-          if (
-            (selectedFilter &&
-              (!selectedFilter.value || selectedFilter.value?.length === 0)) ||
-            (selectedFilter.value instanceof Array &&
-              selectedFilter.value.every((item) => !item))
-          )
-            return null;
-          return (
-            <CFilterOptions
-              key={filter}
-              label={selectedFilter.label}
-              items={getFilterItems(
-                selectedFilter,
-                props.rangeFields,
-                props.getFilterLabel
-              )}
-            />
-          );
-        })}
+      <Flex justify="space-between">
+        <Flex
+          justify="flex-start"
+          align={"center"}
+          gap="xs"
+          wrap="wrap"
+          pr={{ base: "80px", sm: "90px" }}
+        >
+          {Object.keys(selected).map((filter) => {
+            const selectedFilter = selected[filter];
+            if (
+              (selectedFilter &&
+                (!selectedFilter.value ||
+                  selectedFilter.value?.length === 0)) ||
+              (selectedFilter.value instanceof Array &&
+                selectedFilter.value.every((item) => !item))
+            )
+              return null;
+            return (
+              <CFilterOptions
+                key={filter}
+                label={selectedFilter.label}
+                items={getFilterItems(
+                  selectedFilter,
+                  props.rangeFields,
+                  props.getFilterLabel
+                )}
+              />
+            );
+          })}
+        </Flex>
+        {props.rightSection}
       </Flex>
     </Stack>
   );
