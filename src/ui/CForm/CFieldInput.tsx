@@ -7,6 +7,7 @@ import {
   NumberInput,
   TextInput,
   StackProps,
+  Switch,
 } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
 import { CRangeSlider } from "./CRangeSlider";
@@ -56,6 +57,7 @@ const componentMap: Record<string, any> = {
   range: CRangeSlider,
   checkbox: CheckboxInput,
   location: CLocationInput,
+  switch: Switch,
 };
 
 export function CFieldInput(props: Readonly<CFieldInputProps>) {

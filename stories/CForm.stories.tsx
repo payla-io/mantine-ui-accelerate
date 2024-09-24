@@ -60,6 +60,14 @@ export const Basic: Story = {
           step: 100,
         },
       },
+      {
+        name: "accept_terms",
+        inputType: "switch",
+        initialValue: false,
+        inputProps: {
+          label: "Accept terms & conditions",
+        },
+      },
     ],
   },
 };
