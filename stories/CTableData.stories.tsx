@@ -54,6 +54,10 @@ export const Basic: Story = {
         sorting: "number",
       },
     ],
+    defaultOrderBy: {
+      column: { fieldName: "name", label: "Name", sorting: "string" },
+      direction: "desc",
+    },
   },
 };
 

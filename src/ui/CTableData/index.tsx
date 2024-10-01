@@ -45,7 +45,7 @@ export const CTableData = (props: CTableDataProps) => {
   const [selectedColumns, setSelectedColumns] = useState<CTableDataColumn[]>(
     props.columns.filter((col) => !col.hidden)
   );
-
+  console.log("orderBy", orderBy);
   const getFilterProps = (filter: CTableDataFilterProps, fieldName: string) => {
     if (filter) {
       const { valueField, labelField, ...rest } = filter;

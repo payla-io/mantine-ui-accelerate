@@ -1,18 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { CNavigations } from "../src/ui/CNavigations";
 import React from "react";
 import { IconStar } from "@tabler/icons-react";
+import CNavigationTest from "./CNavigationTest";
 
-const meta: Meta<typeof CNavigations> = {
-  component: CNavigations,
+const meta: Meta<typeof CNavigationTest> = {
+  component: CNavigationTest,
 };
 
 export default meta;
-type Story = StoryObj<typeof CNavigations>;
+type Story = StoryObj<typeof CNavigationTest>;
 
 export const Basic: Story = {
   args: {
-    minimisedNav: false,
     links: [
       {
         label: "label 1",

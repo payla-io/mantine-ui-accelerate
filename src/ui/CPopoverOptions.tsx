@@ -6,6 +6,7 @@ import {
   ScrollArea,
   PopoverProps,
   Text,
+  PopoverDropdownProps,
 } from "@mantine/core";
 import { IconFilter, IconFilterCog, IconSearch } from "@tabler/icons-react";
 import React, { useEffect, useState } from "react";
@@ -25,6 +26,7 @@ export interface CPopoverOptionsProps {
   getLabel?: (option: any) => string;
   onChange?: (selected: any[]) => void;
   popoverProps?: PopoverProps;
+  dropdownProps?: PopoverDropdownProps;
   title?: string;
 }
 
@@ -87,7 +89,7 @@ export function CPopoverOptions(props: Readonly<CPopoverOptionsProps>) {
       {...props.popoverProps}
     >
       <Popover.Target>{getTrigger()}</Popover.Target>
-      <Popover.Dropdown>
+      <Popover.Dropdown {...props.dropdownProps}>
         {props.title && <Text mb="lg">{props.title}</Text>}
         <Stack>
           {showSearch && (
