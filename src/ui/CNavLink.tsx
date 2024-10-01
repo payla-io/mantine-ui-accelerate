@@ -12,6 +12,7 @@ import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
 export interface CNavlinkProps extends NavLinkProps {
   minimised?: boolean;
   disableTooltip?: boolean;
+  component?: any;
   links?: CNavigationsLink[];
 }
 
@@ -53,8 +54,10 @@ export const CNavLink = createPolymorphicComponent<"a", CNavlinkProps>(
             renderItem={(item) => {
               return (
                 <NavLink
+                  component={others.component ?? "a"}
                   label={item.label}
-                  href={item.href ?? item.to}
+                  href={item.href}
+                  to={item.to}
                   leftSection={item.icon}
                   onClick={item.onClick}
                 />
