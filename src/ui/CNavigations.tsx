@@ -1,21 +1,14 @@
 import { Box, Stack, ActionIcon } from "@mantine/core";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { CNavLink } from "./CNavLink";
-export interface CNavigationsLink {
-  label: string;
-  icon?: JSX.Element;
-  href?: string;
-  to?: string;
-  onClick?: () => void;
-  hidden?: boolean;
-  children?: CNavigationsLink[];
-}
+import { CNavigationsLink } from "./types";
 
 export interface CNavigationsProps {
   setMinimisedNav?: (minimised: boolean) => void;
   minimisedNav?: boolean;
   links: CNavigationsLink[];
   component?: any;
+  location?: Location;
 }
 
 export function CNavigations(props: Readonly<CNavigationsProps>) {
@@ -23,8 +16,10 @@ export function CNavigations(props: Readonly<CNavigationsProps>) {
     const { children, ...rest } = nav;
     if (nav.hidden) return null;
     const isActive = nav.children?.length
-      ? window.location.pathname.includes((nav.href ?? nav.to) as string)
-      : [nav.href, nav.to].includes(window.location.pathname);
+      ? props.location?.pathname.includes((nav.href ?? nav.to) as string)
+      : [nav.href ?? "", nav.to ?? ""].includes(
+          props.location?.pathname as string
+        );
     return (
       <CNavLink
         key={index}

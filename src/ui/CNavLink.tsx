@@ -5,9 +5,9 @@ import {
   createPolymorphicComponent,
 } from "@mantine/core";
 import { forwardRef, useCallback } from "react";
-import { CNavigationsLink } from "./CNavigations";
 import { CPopoverOptions } from "./CPopoverOptions";
 import { useDisclosure, useDebouncedValue } from "@mantine/hooks";
+import { CNavigationsLink } from "./types";
 
 export interface CNavlinkProps extends NavLinkProps {
   minimised?: boolean;
