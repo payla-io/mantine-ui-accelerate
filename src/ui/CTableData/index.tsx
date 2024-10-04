@@ -62,9 +62,19 @@ export const CTableData = (props: CTableDataProps) => {
           );
         }
       }
-      rest.onChange = (options) => handleOnFilterChange(fieldName, options);
+      rest.onChange = (options) => {
+        if (rest.onSelect) {
+          rest.onSelect(fieldName, options);
+        } else {
+          handleOnFilterChange(fieldName, options);
+        }
+      };
       if (rest.selectedOptions && !selectedFilter[fieldName]) {
-        handleOnFilterChange(fieldName, rest.selectedOptions);
+        if (rest.onSelect) {
+          rest.onSelect(fieldName, rest.selectedOptions);
+        } else {
+          handleOnFilterChange(fieldName, rest.selectedOptions);
+        }
       }
       return rest;
     }

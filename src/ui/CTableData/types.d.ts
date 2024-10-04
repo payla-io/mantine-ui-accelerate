@@ -11,6 +11,7 @@ export interface CTableDataFilterProps {
   selectedOptions?: IOption[];
   onChange?: (options: IOption[]) => void;
   renderLabel?: (option: IOption) => React.ReactNode;
+  onSelect?: (fieldName: string, option: IOption[]) => void;
 }
 
 export interface CTableDataColumn {
