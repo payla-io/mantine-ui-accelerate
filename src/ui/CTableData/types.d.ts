@@ -1,5 +1,5 @@
 import React from "react";
-import { TableProps, TextProps } from "@mantine/core";
+import { TableProps, TextProps, TableTheadProps } from "@mantine/core";
 import { IOption } from "../CForm/types";
 
 export interface CTableDataFilterProps {
@@ -57,4 +57,6 @@ export interface CTableDataProps {
   handleSortChange?: (column: CTableDataColumn, direction: string) => void;
   decSortIndicator?: React.ReactNode;
   ascSortIndicator?: React.ReactNode;
+  theadProps?: TableTheadProps;
+  withHeaderBorderBottom?: boolean;
 }

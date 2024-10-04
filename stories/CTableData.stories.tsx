@@ -63,6 +63,7 @@ export const Basic: Story = {
 
 export const EnableVisibility: Story = {
   args: {
+    withHeaderBorderBottom: true,
     data: [
       {
         name: "name 1",

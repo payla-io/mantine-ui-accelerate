@@ -45,7 +45,6 @@ export const CTableData = (props: CTableDataProps) => {
   const [selectedColumns, setSelectedColumns] = useState<CTableDataColumn[]>(
     props.columns.filter((col) => !col.hidden)
   );
-  console.log("orderBy", orderBy);
   const getFilterProps = (filter: CTableDataFilterProps, fieldName: string) => {
     if (filter) {
       const { valueField, labelField, ...rest } = filter;
@@ -193,12 +192,19 @@ export const CTableData = (props: CTableDataProps) => {
   useEffect(() => {
     if (props.currentPage && props.currentPage !== page)
       setPage(props.currentPage);
-  }, [props.currentPage]);
+  }, [props.currentPage, page]);
 
   return (
     <>
-      <Table {...props.tableProps}>
-        <Table.Thead>
+      <Table withRowBorders={false} {...props.tableProps}>
+        <Table.Thead
+          style={{
+            borderBottom: props.withHeaderBorderBottom
+              ? "1px solid var(--mantine-color-gray-2)"
+              : undefined,
+          }}
+          {...props.theadProps}
+        >
           <Table.Tr data-cy="table-headers">
             {props.columns.map((column, i) => {
               if (
@@ -226,7 +232,7 @@ export const CTableData = (props: CTableDataProps) => {
                         )}
                       />
                     )}
-                    <Text fw={400} fz={16} opacity={0.4} {...props.labelProps}>
+                    <Text fw={500} fz={14} {...props.labelProps}>
                       {column.label}
                     </Text>
                   </Flex>
@@ -288,7 +294,6 @@ export const CTableData = (props: CTableDataProps) => {
             <React.Fragment key={rowIndex}>
               <Table.Tr
                 style={{
-                  borderStyle: "hidden",
                   cursor:
                     props.onRowClick ||
                     props.getCollapsibleContent ||
