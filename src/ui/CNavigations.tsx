@@ -1,4 +1,10 @@
-import { Box, Stack, ActionIcon } from "@mantine/core";
+import {
+  Box,
+  Stack,
+  ActionIcon,
+  ScrollArea,
+  ScrollAreaProps,
+} from "@mantine/core";
 import { IconChevronsLeft, IconChevronsRight } from "@tabler/icons-react";
 import { CNavLink } from "./CNavLink";
 import { CNavigationsLink } from "./types";
@@ -9,6 +15,7 @@ export interface CNavigationsProps {
   links: CNavigationsLink[];
   component?: any;
   location?: Location;
+  scrollAreaProps?: ScrollAreaProps;
 }
 
 export function CNavigations(props: Readonly<CNavigationsProps>) {
@@ -59,9 +66,15 @@ export function CNavigations(props: Readonly<CNavigationsProps>) {
           </ActionIcon>
         </Box>
       )}
-      <Stack gap="xs">
-        {props.links.map((nav, index) => renderNav(nav, index))}
-      </Stack>
+      <ScrollArea.Autosize
+        mah="calc(100vh - 200px)"
+        scrollbars="y"
+        {...props.scrollAreaProps}
+      >
+        <Stack gap="xs">
+          {props.links.map((nav, index) => renderNav(nav, index))}
+        </Stack>
+      </ScrollArea.Autosize>
     </>
   );
 }
