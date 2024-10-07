@@ -219,7 +219,8 @@ export const CTableData = (props: CTableDataProps) => {
             {props.columns.map((column, i) => {
               if (
                 typeof column.label === "string" &&
-                !selectedColumns.some((col) => col.label === column.label)
+                !selectedColumns.some((col) => col.label === column.label) &&
+                props.enableColumnVisibility
               )
                 return null;
               return (
@@ -338,7 +339,10 @@ export const CTableData = (props: CTableDataProps) => {
                 {props.columns.map((column, i) => {
                   if (
                     typeof column.label === "string" &&
-                    !selectedColumns.some((col) => col.label === column.label)
+                    !selectedColumns.some(
+                      (col) => col.label === column.label
+                    ) &&
+                    props.enableColumnVisibility
                   )
                     return null;
                   return (
