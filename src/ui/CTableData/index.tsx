@@ -170,10 +170,10 @@ export const CTableData = (props: CTableDataProps) => {
         });
       });
     }
-    if (orderBy) {
+    if (orderBy && !props.handleSortChange) {
       const { column } = orderBy;
       result = result.sort(
-        column.sorting === "string" ? sortStringMethod : sortNumberMethod
+        column.sorting === "number" ? sortNumberMethod : sortStringMethod
       );
     }
 
@@ -203,6 +203,12 @@ export const CTableData = (props: CTableDataProps) => {
     if (props.currentPage && props.currentPage !== page)
       setPage(props.currentPage);
   }, [props.currentPage, page]);
+
+  useEffect(() => {
+    if (props.defaultOrderBy) {
+      setOrderBy(props.defaultOrderBy);
+    }
+  }, [props.defaultOrderBy]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { Flex, useMantineTheme } from "@mantine/core";
+import { Box, Flex, useMantineTheme } from "@mantine/core";
 import { IconArrowNarrowDown, IconArrowNarrowUp } from "@tabler/icons-react";
 import { useState } from "react";
 import { CTableDataColumn } from "./CTableData/types";
@@ -31,11 +31,17 @@ export function CDataSort(props: Readonly<CDataSortingProps>) {
       }}
     >
       {props.ascIndicator ? (
-        <>
-          {direction === "asc" &&
-            props.orderBy?.column?.fieldName === props.column.fieldName &&
-            props.ascIndicator}
-        </>
+        <Box
+          style={{
+            opacity:
+              direction === "asc" &&
+              props.orderBy?.column?.fieldName === props.column.fieldName
+                ? 1
+                : 0.4,
+          }}
+        >
+          {props.ascIndicator}
+        </Box>
       ) : (
         <IconArrowNarrowUp
           size={"1rem"}
@@ -48,11 +54,17 @@ export function CDataSort(props: Readonly<CDataSortingProps>) {
         />
       )}
       {props.descIndicator ? (
-        <>
-          {direction === "desc" &&
-            props.orderBy?.column?.fieldName === props.column.fieldName &&
-            props.descIndicator}
-        </>
+        <Box
+          style={{
+            opacity:
+              direction === "desc" &&
+              props.orderBy?.column?.fieldName === props.column.fieldName
+                ? 1
+                : 0.4,
+          }}
+        >
+          {props.descIndicator}
+        </Box>
       ) : (
         <IconArrowNarrowDown
           size={"1rem"}

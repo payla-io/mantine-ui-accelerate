@@ -20,7 +20,7 @@ export interface CTableDataColumn {
   renderValue?: (item: any) => React.ReactNode | string | number;
   getValue?: (item: any) => string;
   filter?: CTableDataFilterProps;
-  sorting?: string;
+  sorting?: string | boolean;
   hidden?: boolean;
 }
 
