@@ -20,6 +20,7 @@ export default function CSearchFilterHeaderTest(
       setStateFilters={(filters: Record<string, IFilterItem>) => {
         setSelectedFilter(filters);
       }}
+      enableRefresh={true}
       getStateFilters={() => selectedFilter}
       rangeFields={["created", "booking_date", "amount"]}
       formProps={props.formProps}

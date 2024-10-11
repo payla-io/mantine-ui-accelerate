@@ -16,7 +16,7 @@ export interface CConfirmModaProps {
   confirmButtonProps?: ButtonProps;
   cancelButtonLabel: string;
   cancelButtonProps?: ButtonProps;
-  buttonLabel?: string;
+  buttonLabel?: string | React.ReactNode;
   buttonProps?: ButtonProps;
   opened?: boolean;
   formData?: CFormProps["data"];

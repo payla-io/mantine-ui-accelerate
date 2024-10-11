@@ -27,6 +27,18 @@ export const Basic: Story = {
           },
         },
         {
+          name: "status",
+          inputType: "multi_select",
+          initialValue: [],
+          inputProps: {
+            label: "Status",
+            data: [
+              { value: "active", label: "Active" },
+              { value: "inactive", label: "Inactive" },
+            ],
+          },
+        },
+        {
           name: "booking_date",
           inputType: "date",
           inputProps: {
@@ -52,6 +64,5 @@ export const Basic: Story = {
         },
       ],
     },
-    updateFilterOnlyOnSubmit: true,
   },
 };
