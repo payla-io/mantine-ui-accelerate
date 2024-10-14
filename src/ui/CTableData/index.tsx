@@ -98,12 +98,12 @@ export const CTableData = (props: CTableDataProps) => {
     const { column, direction } = orderBy;
     if (column.fieldName && !column.getValue)
       return (
-        a[column.fieldName].localeCompare(b[column.fieldName]) *
+        a[column.fieldName]?.localeCompare(b[column.fieldName]) *
         (direction === "asc" ? 1 : -1)
       );
     if (column.getValue)
       return (
-        column.getValue(a).localeCompare(column.getValue(b)) *
+        column.getValue(a)?.localeCompare(column.getValue(b)) *
         (direction === "asc" ? 1 : -1)
       );
     return 0;

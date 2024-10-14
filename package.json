@@ -1,6 +1,6 @@
 {
   "name": "@payla-io/mantine-ui-accelerate",
-  "version": "0.2.25",
+  "version": "0.2.26",
   "description": "Collection of mantine ui components to help you accelerate your development",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
