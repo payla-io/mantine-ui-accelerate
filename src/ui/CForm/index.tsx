@@ -38,6 +38,7 @@ export interface CFormProps {
   isPending?: boolean;
   noFooter?: boolean;
   errorMessages?: Record<string, string>;
+  refreshSeed?: number;
   setFormInstance?: (
     formInstance: UseFormReturnType<
       Record<string, unknown>,
@@ -168,6 +169,12 @@ export function CForm(props: Readonly<CFormProps>) {
   useEffect(() => {
     if (props.onCurrentIndexChange) props.onCurrentIndexChange(currentIndex);
   }, [currentIndex]);
+
+  useEffect(() => {
+    if (props.refreshSeed) {
+      fmk.setValues(getInitialValues());
+    }
+  }, [props.refreshSeed]);
 
   return (
     <Box

@@ -1,7 +1,7 @@
 import { ActionIcon, DrawerProps, Flex, Stack, Title } from "@mantine/core";
 import { IconFilter, IconRefresh, IconXboxX } from "@tabler/icons-react";
 import { ICFormField } from "./CForm/types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UseFormReturnType } from "@mantine/form";
 import { CSearchInput, CSearchInputProps } from "./CForm/CSearchInput";
 import { CFormProps, CForm } from "./CForm";
@@ -31,15 +31,23 @@ export interface CSearchFilterHeaderProps {
   setStateFilters: (filters: Record<string, IFilterItem>) => void;
   formatDate?: (date: Date) => string;
   updateFilterOnlyOnSubmit?: boolean;
+  refreshSeed?: number;
 }
 
 export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
-  const { selected, setSelectedFilter, refreshFilters, getFilterItems } =
-    useFilters({
-      formatDate: props.formatDate,
-      setSelected: props.setStateFilters,
-      getSelected: props.getStateFilters,
-    });
+  const {
+    selected,
+    setSelectedFilter,
+    setSelectedFilters,
+    refreshFilters,
+    getFilterItems,
+  } = useFilters({
+    formatDate: props.formatDate,
+    setSelected: props.setStateFilters,
+    getSelected: props.getStateFilters,
+  });
+  const [refreshSeed, setRefreshSeed] = useState(props.refreshSeed ?? 0);
+
   const [fmk, setFmk] =
     useState<
       UseFormReturnType<
@@ -50,6 +58,7 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
   const handleValueChange = (values: {
     [key: string]: ICFormField["initialValue"];
   }) => {
+    const filters: Record<string, IFilterItem> = {};
     props.formProps?.data?.forEach((field) => {
       if (field.name in values) {
         const filter: IFilterItem = {
@@ -58,9 +67,10 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
           value: values[field.name],
           inputType: field.inputType,
         };
-        setSelectedFilter(field.name, filter);
+        filters[field.name] = filter;
       }
     });
+    setSelectedFilters(filters);
   };
 
   const handleSubmit = (values: {
@@ -73,6 +83,7 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
   };
 
   const parseDate = (value: string) => {
+    if (!value) return value;
     if (new Date(value).toString() === "Invalid Date") {
       return value;
     } else {
@@ -129,6 +140,7 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
                 fmk?.reset();
                 if (fmk?.values) fmk.values.search = "";
                 refreshFilters();
+                setRefreshSeed((prev) => prev + 1);
               }}
               size="1.3rem"
               variant="subtle"
@@ -143,6 +155,10 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
       </Flex>
     );
   };
+
+  useEffect(() => {
+    setRefreshSeed(props.refreshSeed ?? 0);
+  }, [props.refreshSeed]);
 
   return (
     <Stack gap="md">
@@ -194,6 +210,7 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
               onValueChange={
                 props.updateFilterOnlyOnSubmit ? undefined : handleValueChange
               }
+              refreshSeed={refreshSeed}
               {...props.formProps}
               data={getFormInitialValues()}
             />

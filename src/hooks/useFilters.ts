@@ -26,6 +26,10 @@ export const useFilters = ({
     });
   };
 
+  const setSelectedFilters = (filters: Record<string, IFilterItem>) => {
+    setSelected(filters);
+  };
+
   const refreshFilters = () => {
     setSelected({});
   };
@@ -156,6 +160,7 @@ export const useFilters = ({
   return {
     selected: getSelected(),
     setSelectedFilter,
+    setSelectedFilters,
     refreshFilters,
     getFilters,
     getFilterItems,
