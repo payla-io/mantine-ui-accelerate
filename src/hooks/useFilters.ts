@@ -26,6 +26,15 @@ export const useFilters = ({
     });
   };
 
+  const parseDate = (value: string | Date) => {
+    if (!value) return value;
+    if (new Date(value).toString() === "Invalid Date") {
+      return value;
+    } else {
+      return new Date(value);
+    }
+  };
+
   const setSelectedFilters = (filters: Record<string, IFilterItem>) => {
     setSelected(filters);
   };
@@ -45,9 +54,10 @@ export const useFilters = ({
           return [
             {
               label: filter.value
-                .map((date) =>
-                  date instanceof Date ? date?.toDateString() : date
-                )
+                .map((v) => {
+                  const date = parseDate(v);
+                  return date instanceof Date ? date.toDateString() : date;
+                })
                 .join(" - "),
               onClose: () => {
                 setSelectedFilter(filter.name, {
@@ -98,12 +108,10 @@ export const useFilters = ({
         };
       });
     } else if (filter.inputType === "date") {
+      const date = parseDate(filter.value);
       return [
         {
-          label:
-            filter.value instanceof Date
-              ? filter.value.toDateString()
-              : filter.value,
+          label: date instanceof Date ? date.toDateString() : date,
           onClose: () => {
             setSelectedFilter(filter.name, {
               ...filter,
@@ -145,11 +153,12 @@ export const useFilters = ({
         filters[key] = value
           .map((v) => {
             if (filter.inputType === "date") {
+              const date = parseDate(v);
               return formatDate
-                ? formatDate(v)
-                : v instanceof Date
-                ? v.toDateString()
-                : v;
+                ? formatDate(date as Date)
+                : date instanceof Date
+                ? date.toDateString()
+                : date;
             }
             if (v instanceof Object) {
               return v.value;
