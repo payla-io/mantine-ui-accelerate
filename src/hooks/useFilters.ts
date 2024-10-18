@@ -45,7 +45,9 @@ export const useFilters = ({
           return [
             {
               label: filter.value
-                .map((date) => date?.toDateString())
+                .map((date) =>
+                  date instanceof Date ? date?.toDateString() : date
+                )
                 .join(" - "),
               onClose: () => {
                 setSelectedFilter(filter.name, {
@@ -98,7 +100,10 @@ export const useFilters = ({
     } else if (filter.inputType === "date") {
       return [
         {
-          label: filter.value.toDateString(),
+          label:
+            filter.value instanceof Date
+              ? filter.value.toDateString()
+              : filter.value,
           onClose: () => {
             setSelectedFilter(filter.name, {
               ...filter,
@@ -140,7 +145,11 @@ export const useFilters = ({
         filters[key] = value
           .map((v) => {
             if (filter.inputType === "date") {
-              return formatDate ? formatDate(v) : v.toDateString();
+              return formatDate
+                ? formatDate(v)
+                : v instanceof Date
+                ? v.toDateString()
+                : v;
             }
             if (v instanceof Object) {
               return v.value;
