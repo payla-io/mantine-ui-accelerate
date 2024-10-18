@@ -5,6 +5,7 @@ export interface IFilterItem {
   name: string;
   label: TextInputProps["label"];
   value?: ICFormField["initialValue"];
+  inputType?: ICFormField["inputType"];
 }
 
 interface IUseFilters {
@@ -36,7 +37,7 @@ export const useFilters = ({
   ) => {
     if (filter.value instanceof Array) {
       if (filter.value.length > 0 && rangeFields?.includes(filter.name)) {
-        if (filter.value[0] instanceof Date) {
+        if (filter.inputType === "date") {
           return [
             {
               label: filter.value
@@ -55,13 +56,10 @@ export const useFilters = ({
             {
               label: filter.value
                 .map((v) => {
-                  if (!isNaN(v)) {
-                    return v;
-                  }
-                  if (new Date(v).toString() !== "Invalid Date") {
-                    return new Date(v).toDateString();
-                  }
-                  return v;
+                  const label = getFilterLabel
+                    ? getFilterLabel(filter.name, v)
+                    : v;
+                  return label;
                 })
                 .join(" - "),
               onClose: () => {
@@ -93,7 +91,7 @@ export const useFilters = ({
           },
         };
       });
-    } else if (filter.value instanceof Date) {
+    } else if (filter.inputType === "date") {
       return [
         {
           label: filter.value.toDateString(),
@@ -106,9 +104,15 @@ export const useFilters = ({
         },
       ];
     }
+    let label = getFilterLabel
+      ? getFilterLabel(filter.name, filter.value)
+      : filter.value;
+    if (filter.value && typeof filter.value === "object") {
+      label = filter.value.label;
+    }
     return [
       {
-        label: filter.value,
+        label: label,
         onClose: () => {
           setSelectedFilter(filter.name, {
             ...filter,
@@ -123,41 +127,28 @@ export const useFilters = ({
     const filters: { [key: string]: string } = {};
     const currentSelected = getSelected();
     Object.keys(currentSelected).forEach((key) => {
-      const value = currentSelected[key].value;
+      const filter = currentSelected[key];
+      const value = filter.value;
       if (value instanceof Array) {
         if (value.length === 0 || value[0] === undefined || value[0] === null)
           return;
         if (value.every((v) => v === 0)) return;
-        let prevDate: Date | null = null;
         filters[key] = value
           .map((v) => {
-            if (v === null && prevDate) {
-              return formatDate
-                ? formatDate(prevDate)
-                : prevDate.toDateString();
-            }
-            if (v instanceof Date) {
-              prevDate = new Date(v);
+            if (filter.inputType === "date") {
               return formatDate ? formatDate(v) : v.toDateString();
             }
             if (v instanceof Object) {
               return v.value;
             }
-            if (new Date(v).toString() === "Invalid Date") {
-              return v;
-            }
-            if (!isNaN(v)) {
-              return v;
-            }
-            prevDate = new Date(v);
-            return formatDate ? formatDate(v) : v.toDateString();
+            return v;
           })
           .join(",");
       } else {
         if (!value) return;
 
         filters[key] =
-          value instanceof Date && formatDate ? formatDate(value) : value;
+          filter.inputType === "date" && formatDate ? formatDate(value) : value;
       }
     });
     return filters;

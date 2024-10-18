@@ -56,6 +56,7 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
           name: field.name,
           label: field.inputProps?.label ?? field.name,
           value: values[field.name],
+          inputType: field.inputType,
         };
         setSelectedFilter(field.name, filter);
       }
@@ -71,25 +72,25 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
     props.onFormSubmit?.(values);
   };
 
-  const parseValue = (value: unknown) => {
+  const parseDate = (value: string) => {
+    if (new Date(value).toString() === "Invalid Date") {
+      return value;
+    } else {
+      return new Date(value);
+    }
+  };
+
+  const parseValue = (value: unknown, inputType: ICFormField["inputType"]) => {
     if (value instanceof Array) {
       return value.map((v) => {
-        if (typeof v === "string") {
-          if (new Date(v).toString() === "Invalid Date") {
-            return v;
-          } else {
-            return new Date(v);
-          }
+        if (inputType === "date") {
+          return parseDate(v as string);
         }
         return v;
       });
     } else {
-      if (typeof value === "string") {
-        if (new Date(value).toString() === "Invalid Date") {
-          return value;
-        } else {
-          return new Date(value);
-        }
+      if (inputType === "date") {
+        return parseDate(value as string);
       }
       return value;
     }
@@ -101,7 +102,8 @@ export function CSearchFilterHeader(props: Readonly<CSearchFilterHeaderProps>) {
         return {
           ...field,
           initialValue: parseValue(
-            selected[field.name]?.value ?? field.initialValue
+            selected[field.name]?.value ?? field.initialValue,
+            field.inputType
           ),
         };
       }) ?? []
