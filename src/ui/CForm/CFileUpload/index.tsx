@@ -32,6 +32,7 @@ export interface CFileUploadProps {
   >;
   dropzoneProps?: CDropzoneProps;
   getDisplayInfo?: () => React.ReactNode;
+  componentType?: string;
 }
 
 export const CFileUpload = ({
@@ -40,6 +41,7 @@ export const CFileUpload = ({
   form,
   dropzoneProps,
   getDisplayInfo,
+  componentType,
 }: CFileUploadProps) => {
   const openRef = useRef<() => void>(null);
   const [error, setError] = useState<string | null>(null);
@@ -66,7 +68,7 @@ export const CFileUpload = ({
       {!!imageUrl && (
         <CUploadedFile
           file={file}
-          componentType="image"
+          componentType={componentType ?? "image"}
           handleRemoveImage={handleRemoveImage}
           openSelect={openSelect}
           error={error}

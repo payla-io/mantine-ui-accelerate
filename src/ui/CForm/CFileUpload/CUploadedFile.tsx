@@ -30,9 +30,13 @@ export const CUploadedFile: FC<CUploadedFileProps> = ({
 }) => {
   const isFile = file instanceof File;
   const imageUrl = isFile ? URL.createObjectURL(file) : file;
+  const isImage = imageUrl?.toString().includes("data:image");
   const getIcon = () => {
     switch (componentType) {
       case "file": {
+        return <IconPdf />;
+      }
+      case "pdfOrImage": {
         return <IconPdf />;
       }
       case "video": {
@@ -50,7 +54,8 @@ export const CUploadedFile: FC<CUploadedFileProps> = ({
   return (
     <Flex direction="column">
       <Stack gap="sm">
-        {componentType === "image" ? (
+        {(componentType === "image" || componentType === "pdfOrImage") &&
+        isImage ? (
           <Stack align="center">
             <Box>
               <Image

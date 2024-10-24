@@ -68,6 +68,17 @@ export const Basic: Story = {
           label: "Accept terms & conditions",
         },
       },
+      {
+        name: "pdf_or_image",
+        inputType: "file",
+        inputProps: {
+          componentType: "pdfOrImage",
+          required: true,
+          dropzoneProps: {
+            maxSize: 10 * 1024 ** 2,
+          },
+        },
+      },
     ],
   },
 };
