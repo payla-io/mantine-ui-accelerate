@@ -21,6 +21,7 @@ import { ICondition } from "../../utils/conditions";
 import { CTextInput } from "./CTextInput";
 import { CDateInputPicker } from "./CDateInputPicker";
 import { DatePickerInput } from "@mantine/dates";
+import { CButtonOptions } from "../CButtonOptions";
 
 export interface CFieldInputProps {
   name: string;
@@ -58,6 +59,7 @@ const componentMap: Record<string, any> = {
   checkbox: CheckboxInput,
   location: CLocationInput,
   switch: Switch,
+  button_options: CButtonOptions,
 };
 
 export function CFieldInput(props: Readonly<CFieldInputProps>) {

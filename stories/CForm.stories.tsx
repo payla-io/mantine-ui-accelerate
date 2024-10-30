@@ -49,6 +49,19 @@ export const Basic: Story = {
         },
       },
       {
+        name: "big_small",
+        inputType: "button_options",
+        inputProps: {
+          placeholder: "Big or small",
+          label: "Big or small",
+          options: [
+            { value: "", label: "None" },
+            { value: "big", label: "Big" },
+            { value: "small", label: "Small" },
+          ],
+        },
+      },
+      {
         name: "amount",
         inputType: "range",
         initialValue: [0, 0],
