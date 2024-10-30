@@ -22,6 +22,7 @@ export const Horizontal: Story = {
     ],
     direction: "horizontal",
     value: "1",
+    label: "Horizontal",
   },
 };
 
@@ -34,6 +35,7 @@ export const Vertical: Story = {
     ],
     direction: "vertical",
     value: "2",
+    label: "Vertical",
   },
 };
 
@@ -45,5 +47,6 @@ export const WithNumbers: Story = {
       { label: "Three", value: 3 },
     ],
     value: 1,
+    label: "With numbers",
   },
 };
