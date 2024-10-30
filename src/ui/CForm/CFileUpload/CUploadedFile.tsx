@@ -1,11 +1,12 @@
-import { Image, Text, Box, Flex, Button, Stack } from "@mantine/core";
+import { Box, Button, Flex, Image, Stack, Text } from "@mantine/core";
 import {
   IconDeviceAudioTape,
   IconFile,
-  IconPdf,
+  IconFileTypePdf,
   IconVideo,
 } from "@tabler/icons-react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { fileToBase64 } from "../../../utils";
 
 export interface CUploadedFileProps {
   handleRemoveImage: () => void;
@@ -29,15 +30,31 @@ export const CUploadedFile: FC<CUploadedFileProps> = ({
   removeButtonLabel = "Remove",
 }) => {
   const isFile = file instanceof File;
-  const imageUrl = isFile ? URL.createObjectURL(file) : file;
-  const isImage = imageUrl?.toString().includes("data:image");
+
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isImage, setIsImage] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getImageUrl = async () => {
+      if (isFile) {
+        const base64File = await fileToBase64(file);
+        setImageUrl(base64File);
+        setIsImage(base64File?.toString().includes("data:image") ?? false);
+      } else {
+        setImageUrl(file);
+        setIsImage(file?.toString().includes("data:image"));
+      }
+    };
+
+    getImageUrl();
+  }, [file, isFile]);
   const getIcon = () => {
     switch (componentType) {
-      case "file": {
-        return <IconPdf />;
-      }
       case "pdfOrImage": {
-        return <IconPdf />;
+        return <IconFileTypePdf color={"var(--mantine-color-red-5)"} />;
+      }
+      case "file": {
+        return <IconFile />;
       }
       case "video": {
         return <IconVideo />;

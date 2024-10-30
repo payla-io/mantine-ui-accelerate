@@ -76,6 +76,7 @@ export const Basic: Story = {
           required: true,
           dropzoneProps: {
             maxSize: 10 * 1024 ** 2,
+            noBase64: true,
           },
         },
       },
